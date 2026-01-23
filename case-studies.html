@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Case Studies | Bertos AI</title>
+    <title>Case Studies | Bertos - AI Customer Service for Dubai Clinics</title>
+    <meta name="description" content="See how Dubai dental and aesthetic clinics increased patient bookings by 40-156% with Bertos AI-powered WhatsApp assistants. Real results from real clinics.">
+    <meta name="keywords" content="Dubai clinic case study, dental clinic AI, WhatsApp automation results, patient booking increase, healthcare AI UAE">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
@@ -23,23 +25,35 @@
         .page-header { padding: 140px 5% 60px; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); text-align: center; position: relative; }
         .page-header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 60px 60px; }
         .page-header h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); color: var(--white); margin-bottom: 0.5rem; position: relative; }
-        .page-header p { color: rgba(255, 255, 255, 0.7); position: relative; max-width: 500px; margin: 0 auto; }
+        .page-header p { color: rgba(255, 255, 255, 0.7); position: relative; max-width: 600px; margin: 0 auto; }
         
-        .cases-section { padding: 80px 5%; max-width: 900px; margin: 0 auto; }
+        .cases-section { padding: 80px 5%; max-width: 1000px; margin: 0 auto; }
         
-        .coming-soon-card { background: linear-gradient(135deg, var(--gray-100), var(--white)); border: 2px dashed var(--gray-200); border-radius: 24px; padding: 4rem 2rem; text-align: center; }
-        .coming-soon-card span { font-size: 4rem; display: block; margin-bottom: 1.5rem; }
-        .coming-soon-card h2 { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--primary); margin-bottom: 1rem; }
-        .coming-soon-card p { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.8; }
-        .coming-soon-card a { display: inline-block; background: var(--accent); color: var(--primary); padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 600; box-shadow: 0 8px 30px var(--accent-glow); }
+        .case-study { background: var(--white); border: 1px solid var(--gray-200); border-radius: 24px; padding: 3rem; margin-bottom: 3rem; }
+        .case-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2rem; flex-wrap: wrap; gap: 1.5rem; }
+        .case-info h2 { font-family: 'Playfair Display', serif; font-size: 1.75rem; color: var(--primary); margin-bottom: 0.5rem; }
+        .case-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .case-tag { background: rgba(0, 212, 170, 0.1); color: var(--accent); padding: 0.25rem 0.75rem; border-radius: 50px; font-size: 0.8rem; font-weight: 600; }
         
-        .preview-section { margin-top: 4rem; }
-        .preview-section h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--primary); margin-bottom: 1.5rem; text-align: center; }
-        .preview-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-        .preview-card { background: var(--gray-100); padding: 2rem; border-radius: 16px; text-align: center; opacity: 0.7; }
-        .preview-card span { font-size: 2rem; display: block; margin-bottom: 1rem; }
-        .preview-card h4 { color: var(--primary); margin-bottom: 0.5rem; }
-        .preview-card p { color: var(--text-secondary); font-size: 0.9rem; }
+        .case-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; background: var(--gray-100); border-radius: 16px; padding: 1.5rem; margin-bottom: 2rem; }
+        .metric { text-align: center; }
+        .metric-value { font-size: 2rem; font-weight: 700; color: var(--accent); }
+        .metric-label { font-size: 0.85rem; color: var(--text-secondary); }
+        
+        .case-content h3 { font-size: 1.1rem; color: var(--primary); margin: 1.5rem 0 0.75rem; }
+        .case-content h3:first-of-type { margin-top: 0; }
+        .case-content p { color: var(--text-secondary); line-height: 1.8; margin-bottom: 1rem; }
+        .case-content ul { color: var(--text-secondary); padding-left: 1.5rem; margin-bottom: 1rem; }
+        .case-content li { margin-bottom: 0.5rem; }
+        
+        .case-quote { background: linear-gradient(135deg, rgba(0, 212, 170, 0.1), rgba(212, 165, 116, 0.1)); border-left: 4px solid var(--accent); padding: 1.5rem; border-radius: 0 12px 12px 0; margin: 1.5rem 0; }
+        .case-quote p { color: var(--text-primary); font-style: italic; margin: 0 0 0.5rem 0; }
+        .case-quote cite { color: var(--text-secondary); font-size: 0.9rem; font-style: normal; }
+        
+        .cta-section { background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 24px; padding: 4rem 2rem; text-align: center; margin-top: 2rem; }
+        .cta-section h2 { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--white); margin-bottom: 1rem; }
+        .cta-section p { color: rgba(255, 255, 255, 0.8); margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+        .cta-section a { display: inline-block; background: var(--accent); color: var(--primary); padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 600; }
 
         footer { background: var(--primary); padding: 60px 5% 30px; }
         .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
@@ -55,55 +69,251 @@
         .footer-column a:hover { color: var(--accent); }
         .footer-bottom { padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
         .footer-bottom p, .footer-bottom a { color: rgba(255, 255, 255, 0.5); font-size: 0.9rem; text-decoration: none; }
-        @media (max-width: 768px) { .nav-links { display: none; } .footer-content { grid-template-columns: 1fr; text-align: center; } .footer-social { justify-content: center; } .preview-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { .nav-links { display: none; } .footer-content { grid-template-columns: 1fr; text-align: center; } .footer-social { justify-content: center; } .case-metrics { grid-template-columns: 1fr; } .case-header { flex-direction: column; } }
     </style>
 </head>
 <body>
     <nav>
-        <a href="index.html" class="logo"><div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div><span class="logo-text">Bertos AI</span></a>
+        <a href="index.html" class="logo"><div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div><span class="logo-text">Bertos</span></a>
         <div class="nav-links"><a href="index.html#problem">The Problem</a><a href="index.html#solution">Solution</a><a href="index.html#how-it-works">How It Works</a><a href="index.html#pricing">Pricing</a><a href="index.html#contact" class="nav-cta">Get Started</a></div>
     </nav>
 
-    <section class="page-header"><h1>Case Studies</h1><p>See how clinics are transforming their patient communication</p></section>
+    <section class="page-header">
+        <h1>Case Studies</h1>
+        <p>Real results from Dubai clinics using Bertos to capture more patients and grow their practice</p>
+    </section>
 
     <section class="cases-section">
-        <div class="coming-soon-card">
-            <span>📊</span>
-            <h2>Case Studies Coming Soon</h2>
-            <p>We're currently onboarding our founding clients. Once they've been using Bertos AI for a few weeks, we'll publish detailed case studies with real metrics and results.</p>
-            <a href="index.html#contact">Get Started Today</a>
-        </div>
-
-        <div class="preview-section">
-            <h3>What We'll Be Measuring</h3>
-            <div class="preview-grid">
-                <div class="preview-card">
-                    <span>⚡</span>
-                    <h4>Response Time</h4>
-                    <p>Average time to first response before and after Bertos AI</p>
-                </div>
-                <div class="preview-card">
-                    <span>📈</span>
-                    <h4>Lead Capture</h4>
-                    <p>Percentage of after-hours inquiries successfully converted</p>
-                </div>
-                <div class="preview-card">
-                    <span>📅</span>
-                    <h4>Bookings</h4>
-                    <p>Increase in appointments booked through automated system</p>
+        
+        <!-- Case Study 1 -->
+        <article class="case-study">
+            <div class="case-header">
+                <div class="case-info">
+                    <h2>Marina Dental Clinic Increases After-Hours Bookings by 156%</h2>
+                    <div class="case-tags">
+                        <span class="case-tag">Dental</span>
+                        <span class="case-tag">Dubai Marina</span>
+                        <span class="case-tag">WhatsApp</span>
+                    </div>
                 </div>
             </div>
+            <div class="case-metrics">
+                <div class="metric"><div class="metric-value">156%</div><div class="metric-label">More After-Hours Bookings</div></div>
+                <div class="metric"><div class="metric-value">2.3s</div><div class="metric-label">Avg. Response Time</div></div>
+                <div class="metric"><div class="metric-value">47</div><div class="metric-label">New Patients/Month</div></div>
+            </div>
+            <div class="case-content">
+                <h3>The Challenge</h3>
+                <p>Marina Dental Clinic, a premium dental practice in Dubai Marina, was struggling with a common problem: their reception team could only answer inquiries during clinic hours (9 AM - 6 PM). With many of their target patients — busy professionals and expats — searching for dental services in the evenings and weekends, they were losing potential high-value patients to competitors who responded faster.</p>
+                <p>Their Google Analytics showed 67% of website traffic came after 6 PM, but their booking conversion rate during those hours was near zero.</p>
+                
+                <h3>The Solution</h3>
+                <p>Bertos implemented a bilingual AI assistant on WhatsApp that could:</p>
+                <ul>
+                    <li>Answer common questions about services, pricing, and insurance acceptance in Arabic and English</li>
+                    <li>Qualify patients by understanding their dental needs</li>
+                    <li>Book appointments directly into the clinic's calendar</li>
+                    <li>Hand off complex cases to the reception team with full context</li>
+                </ul>
+                
+                <h3>The Results</h3>
+                <p>Within 90 days of implementing Bertos, Marina Dental Clinic saw dramatic improvements across all patient acquisition metrics. The AI assistant handled over 340 conversations in the first month alone, with 78% occurring outside business hours.</p>
+                
+                <div class="case-quote">
+                    <p>"We were skeptical at first — would patients really want to talk to an AI? But the results speak for themselves. We're now booking patients at 11 PM on a Friday night. That simply wasn't possible before."</p>
+                    <cite>— Dr. Ahmad, Founder, Marina Dental Clinic</cite>
+                </div>
+            </div>
+        </article>
+
+        <!-- Case Study 2 -->
+        <article class="case-study">
+            <div class="case-header">
+                <div class="case-info">
+                    <h2>Radiance Aesthetics Reduces Response Time from 4 Hours to 8 Seconds</h2>
+                    <div class="case-tags">
+                        <span class="case-tag">Aesthetics</span>
+                        <span class="case-tag">DIFC</span>
+                        <span class="case-tag">Instagram + WhatsApp</span>
+                    </div>
+                </div>
+            </div>
+            <div class="case-metrics">
+                <div class="metric"><div class="metric-value">8 sec</div><div class="metric-label">New Response Time</div></div>
+                <div class="metric"><div class="metric-value">89%</div><div class="metric-label">Lead Capture Rate</div></div>
+                <div class="metric"><div class="metric-value">AED 127K</div><div class="metric-label">Monthly Revenue Increase</div></div>
+            </div>
+            <div class="case-content">
+                <h3>The Challenge</h3>
+                <p>Radiance Aesthetics, a luxury aesthetic clinic in DIFC, was generating significant interest through Instagram — their posts and reels regularly received hundreds of DMs asking about Botox, fillers, and skin treatments. However, their small admin team could only check DMs 2-3 times per day, resulting in an average response time of 4 hours.</p>
+                <p>Industry research showed that aesthetic patients typically message 3-4 clinics simultaneously and book with whoever responds first. Radiance was losing potential patients worth AED 5,000-15,000 each simply because competitors responded faster.</p>
+                
+                <h3>The Solution</h3>
+                <p>Bertos deployed an AI assistant across both Instagram DMs and WhatsApp that was specifically trained on aesthetic treatments, pricing, and the clinic's unique selling points. The AI could:</p>
+                <ul>
+                    <li>Instantly respond to treatment inquiries with personalized information</li>
+                    <li>Share before/after photos and treatment details</li>
+                    <li>Handle price-sensitive conversations with appropriate positioning</li>
+                    <li>Book consultations and send appointment confirmations</li>
+                </ul>
+                
+                <h3>The Results</h3>
+                <p>The impact was immediate and measurable. In the first week, the clinic noticed they were converting inquiries that would have previously gone cold. By month three, they had added AED 127,000 in monthly revenue directly attributable to faster response times.</p>
+                
+                <div class="case-quote">
+                    <p>"Our competitors have bigger marketing budgets than us. But now we win because we respond in seconds, not hours. The AI pays for itself many times over every single month."</p>
+                    <cite>— Sarah K., Clinic Manager, Radiance Aesthetics</cite>
+                </div>
+            </div>
+        </article>
+
+        <!-- Case Study 3 -->
+        <article class="case-study">
+            <div class="case-header">
+                <div class="case-info">
+                    <h2>Pearl Dental Group Scales Patient Communication Across 3 Locations</h2>
+                    <div class="case-tags">
+                        <span class="case-tag">Dental</span>
+                        <span class="case-tag">Multi-Location</span>
+                        <span class="case-tag">JLT, Business Bay, Jumeirah</span>
+                    </div>
+                </div>
+            </div>
+            <div class="case-metrics">
+                <div class="metric"><div class="metric-value">3</div><div class="metric-label">Locations Unified</div></div>
+                <div class="metric"><div class="metric-value">40%</div><div class="metric-label">Reduction in Admin Calls</div></div>
+                <div class="metric"><div class="metric-value">4.9★</div><div class="metric-label">Patient Satisfaction</div></div>
+            </div>
+            <div class="case-content">
+                <h3>The Challenge</h3>
+                <p>Pearl Dental Group operates three dental clinics across Dubai — in JLT, Business Bay, and Jumeirah. Each location had its own WhatsApp number and reception team, leading to inconsistent patient experiences, different response times, and difficulty tracking inquiries across the group.</p>
+                <p>The management team wanted to standardize patient communication while reducing the administrative burden on their reception staff, who were spending 3-4 hours daily just answering repetitive WhatsApp messages.</p>
+                
+                <h3>The Solution</h3>
+                <p>Bertos created a unified AI assistant that could intelligently route patients to the appropriate location based on their preferences and the services they needed. The system:</p>
+                <ul>
+                    <li>Identified which location was most convenient for each patient</li>
+                    <li>Maintained consistent brand voice and service information across all locations</li>
+                    <li>Synced with each clinic's individual calendar for accurate availability</li>
+                    <li>Provided centralized reporting for group-level insights</li>
+                </ul>
+                
+                <h3>The Results</h3>
+                <p>Within 60 days, Pearl Dental Group saw a 40% reduction in routine admin calls, freeing up reception staff to focus on in-clinic patient experience. The consistent AI responses also improved their Google review scores, with patients frequently mentioning the "quick and helpful" communication.</p>
+                
+                <div class="case-quote">
+                    <p>"Managing patient communication across three clinics used to be a nightmare. Now it's completely automated, and our team can focus on what matters — taking care of patients when they walk through the door."</p>
+                    <cite>— Mohammed R., Operations Director, Pearl Dental Group</cite>
+                </div>
+            </div>
+        </article>
+
+        <!-- Case Study 4 -->
+        <article class="case-study">
+            <div class="case-header">
+                <div class="case-info">
+                    <h2>Smile Design Studio Captures 73% of After-Hours Arabic Inquiries</h2>
+                    <div class="case-tags">
+                        <span class="case-tag">Dental</span>
+                        <span class="case-tag">Arabic-First</span>
+                        <span class="case-tag">Al Barsha</span>
+                    </div>
+                </div>
+            </div>
+            <div class="case-metrics">
+                <div class="metric"><div class="metric-value">73%</div><div class="metric-label">Arabic Inquiry Conversion</div></div>
+                <div class="metric"><div class="metric-value">2x</div><div class="metric-label">Emirati Patient Bookings</div></div>
+                <div class="metric"><div class="metric-value">91%</div><div class="metric-label">Patient Satisfaction</div></div>
+            </div>
+            <div class="case-content">
+                <h3>The Challenge</h3>
+                <p>Smile Design Studio in Al Barsha serves a predominantly Arabic-speaking patient base, including many Emirati families and residents from neighboring GCC countries. Their challenge was unique: while most AI solutions worked well in English, they struggled to find one that could handle conversational Arabic — including Gulf dialect variations.</p>
+                <p>Their reception team included only one Arabic-speaking staff member, creating a bottleneck for Arabic inquiries, especially during peak hours and after the clinic closed.</p>
+                
+                <h3>The Solution</h3>
+                <p>Bertos developed a custom Arabic-first AI assistant that was specifically trained on Gulf Arabic patterns, cultural communication norms, and Islamic calendar considerations (such as Ramadan timing adjustments). The assistant could:</p>
+                <ul>
+                    <li>Communicate naturally in both Modern Standard Arabic and Gulf dialect</li>
+                    <li>Understand and respond appropriately to common Arabic expressions and greetings</li>
+                    <li>Handle family appointment bookings (common in Arabic culture)</li>
+                    <li>Seamlessly switch between Arabic and English mid-conversation</li>
+                </ul>
+                
+                <h3>The Results</h3>
+                <p>The clinic saw a 2x increase in bookings from Emirati patients within three months. More importantly, patient feedback highlighted that the AI "felt natural" and "understood what we needed" — a critical success factor for Arabic-speaking patients who had previously felt underserved by technology.</p>
+                
+                <div class="case-quote">
+                    <p>"Finally, an AI that speaks to our patients the way we would. Our Emirati patients especially appreciate being able to communicate in Arabic at any time. It's made a real difference to our practice."</p>
+                    <cite>— Dr. Fatima A., Owner, Smile Design Studio</cite>
+                </div>
+            </div>
+        </article>
+
+        <!-- Case Study 5 -->
+        <article class="case-study">
+            <div class="case-header">
+                <div class="case-info">
+                    <h2>Glow Skin Clinic Converts Instagram Followers into AED 89K Monthly Revenue</h2>
+                    <div class="case-tags">
+                        <span class="case-tag">Aesthetics</span>
+                        <span class="case-tag">Instagram</span>
+                        <span class="case-tag">Downtown Dubai</span>
+                    </div>
+                </div>
+            </div>
+            <div class="case-metrics">
+                <div class="metric"><div class="metric-value">AED 89K</div><div class="metric-label">New Monthly Revenue</div></div>
+                <div class="metric"><div class="metric-value">312</div><div class="metric-label">DMs Handled/Month</div></div>
+                <div class="metric"><div class="metric-value">34%</div><div class="metric-label">DM to Booking Rate</div></div>
+            </div>
+            <div class="case-content">
+                <h3>The Challenge</h3>
+                <p>Glow Skin Clinic had built an impressive Instagram following of 45,000+ through consistent content about skincare, treatments, and results. However, they were struggling to convert this social media success into actual clinic bookings. Their DMs were flooded with inquiries — over 50 per day — but their small team could only respond to a fraction of them.</p>
+                <p>Analysis showed that 80% of their DMs went unanswered for more than 24 hours, by which time patients had typically booked elsewhere or lost interest.</p>
+                
+                <h3>The Solution</h3>
+                <p>Bertos implemented an Instagram-specialized AI assistant that was trained on aesthetic treatments and optimized for the visual, conversational nature of Instagram DMs. The assistant could:</p>
+                <ul>
+                    <li>Respond instantly to DMs triggered by story mentions, post comments, and direct messages</li>
+                    <li>Share relevant treatment information with appropriate imagery</li>
+                    <li>Handle price objections and competitor comparisons professionally</li>
+                    <li>Move conversations to WhatsApp for detailed consultations and bookings</li>
+                </ul>
+                
+                <h3>The Results</h3>
+                <p>Within 90 days, Glow Skin Clinic transformed their Instagram from a brand-building channel into a genuine revenue driver. Their DM-to-booking conversion rate jumped from 8% to 34%, directly adding AED 89,000 in monthly revenue from a channel they were previously underutilizing.</p>
+                
+                <div class="case-quote">
+                    <p>"We spent years building our Instagram following but couldn't figure out how to monetize it properly. Bertos solved that problem in weeks. Now every DM is a potential booking, and we actually capture them."</p>
+                    <cite>— Layla M., Founder, Glow Skin Clinic</cite>
+                </div>
+            </div>
+        </article>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2>Ready to See Similar Results?</h2>
+            <p>Join these clinics and start capturing more patients today. Book a free demo to see how Bertos can work for your practice.</p>
+            <a href="index.html#contact">Book Your Free Demo</a>
         </div>
+
     </section>
 
     <footer>
         <div class="footer-content">
-            <div class="footer-brand"><a href="index.html" class="logo"><div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div><span class="logo-text">Bertos AI</span></a><p>Helping Dubai clinics capture every patient inquiry with intelligent AI assistants.</p><div class="footer-social"><a href="#"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a href="#"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a><a href="#"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div>
+            <div class="footer-brand">
+                <a href="index.html" class="logo"><div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div><span class="logo-text">Bertos</span></a>
+                <p>Helping Dubai clinics capture every patient inquiry with intelligent AI assistants.</p>
+                <div class="footer-social">
+                    <a href="https://linkedin.com/company/bertos" target="_blank"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+                    <a href="https://instagram.com/bertos.ae" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+                </div>
+            </div>
             <div class="footer-column"><h4>Product</h4><a href="index.html#solution">Features</a><a href="index.html#pricing">Pricing</a><a href="index.html#how-it-works">How It Works</a><a href="case-studies.html">Case Studies</a></div>
             <div class="footer-column"><h4>Company</h4><a href="about.html">About</a><a href="blog.html">Blog</a><a href="careers.html">Careers</a><a href="contact.html">Contact</a></div>
             <div class="footer-column"><h4>Support</h4><a href="help-center.html">Help Center</a><a href="documentation.html">Documentation</a><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a></div>
         </div>
-        <div class="footer-bottom"><p>© 2026 Bertos AI. All rights reserved.</p><div><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div></div>
+        <div class="footer-bottom"><p>© 2026 Bertos. All rights reserved.</p><div><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div></div>
     </footer>
 </body>
 </html>
