@@ -203,49 +203,84 @@
             margin: 0;
         }
 
-        /* Founder Section */
-        .founder-section {
+        /* Why Choose Section */
+        .why-section {
             background: var(--gray-100);
             padding: 80px 5%;
         }
 
-        .founder-content {
+        .why-content {
             max-width: 900px;
             margin: 0 auto;
-            display: grid;
-            grid-template-columns: 200px 1fr;
-            gap: 3rem;
-            align-items: center;
+            text-align: center;
         }
 
-        .founder-image {
-            width: 200px;
-            height: 200px;
-            background: linear-gradient(135deg, var(--accent), var(--gold));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            color: white;
-        }
-
-        .founder-text h3 {
+        .why-content h2 {
             font-family: 'Playfair Display', serif;
-            font-size: 1.75rem;
+            font-size: 2rem;
             color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .founder-text .title {
-            color: var(--accent);
-            font-weight: 600;
             margin-bottom: 1rem;
         }
 
-        .founder-text p {
+        .why-content > p {
             color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .mission-box {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 3rem;
+            border-radius: 20px;
+            color: white;
+        }
+
+        .mission-box h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .mission-box p {
+            font-size: 1.1rem;
+            opacity: 0.9;
             line-height: 1.8;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* CTA Section */
@@ -346,8 +381,7 @@
 
         @media (max-width: 768px) {
             .nav-links { display: none; }
-            .founder-content { grid-template-columns: 1fr; text-align: center; }
-            .founder-image { margin: 0 auto; }
+            .values-grid { grid-template-columns: 1fr; }
             .footer-content { grid-template-columns: 1fr; text-align: center; }
             .footer-social { justify-content: center; }
         }
@@ -380,14 +414,14 @@
     <!-- Our Story -->
     <section class="content-section">
         <h2>Our Story</h2>
-        <p>Bertos was founded with a simple observation: Dubai's dental and aesthetic clinics were losing patients every single night. Not because of poor service or high prices — but because no one was there to answer when patients reached out.</p>
-        <p>We watched as clinics invested heavily in marketing, beautiful facilities, and skilled practitioners — only to see potential patients slip away to competitors who happened to respond first. The data was clear: 78% of patients book with the first clinic to respond.</p>
+        <p>Bertos was born from a simple observation: Dubai's dental and aesthetic clinics were losing patients every single night. Not because of poor service or high prices — but because no one was there to answer when patients reached out.</p>
+        <p>Clinics invest heavily in marketing, beautiful facilities, and skilled practitioners — only to see potential patients slip away to competitors who happen to respond first. The data is clear: 78% of patients book with the first clinic to respond.</p>
         
         <div class="highlight-box">
-            <p>"We realized that the problem wasn't the clinics — it was the technology available to them. Enterprise AI solutions cost hundreds of thousands of dirhams. Small clinics were left behind. We decided to change that."</p>
+            <p>"The problem wasn't the clinics — it was the technology available to them. Enterprise AI solutions cost hundreds of thousands of dirhams. Small and medium clinics were left behind. That had to change."</p>
         </div>
 
-        <p>Today, Bertos provides intelligent, bilingual AI assistants that work around the clock — answering patient questions, booking appointments, and ensuring no inquiry goes unanswered. We've made enterprise-grade technology accessible to clinics of all sizes.</p>
+        <p>Today, Bertos provides intelligent, bilingual AI assistants that work around the clock — answering patient questions, booking appointments, and ensuring no inquiry goes unanswered. We've made enterprise-grade technology accessible to clinics of all sizes across Dubai.</p>
     </section>
 
     <!-- Our Values -->
@@ -425,15 +459,30 @@
         </div>
     </section>
 
-    <!-- Founder Section -->
-    <section class="founder-section">
-        <div class="founder-content">
-            <div class="founder-image">VK</div>
-            <div class="founder-text">
-                <h3>Meet the Founder</h3>
-                <p class="title">Founder & CEO, Bertos</p>
-                <p>Based in Dubai, our founder combines deep knowledge of the local healthcare market with cutting-edge AI expertise. After witnessing firsthand how clinics struggled with after-hours patient communication, they set out to build a solution that actually works — without the enterprise price tag.</p>
-                <p>Bertos is the result: purpose-built AI assistants that speak your patients' language (literally — Arabic and English) and understand the unique needs of Dubai's medical community.</p>
+    <!-- Why Dubai Clinics Choose Us -->
+    <section class="why-section">
+        <div class="why-content">
+            <h2>Why Dubai Clinics Choose Us</h2>
+            <p>We're not just another tech company. We're specialists in healthcare communication, built specifically for the Dubai market.</p>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Always-on patient support</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">&lt;3s</div>
+                    <div class="stat-label">Average response time</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">2</div>
+                    <div class="stat-label">Languages (EN + AR)</div>
+                </div>
+            </div>
+
+            <div class="mission-box">
+                <h3>Our Mission</h3>
+                <p>To ensure no Dubai clinic ever loses a patient due to slow response times. We believe every inquiry deserves an instant, intelligent, and helpful response — whether it's 2 PM or 2 AM. By combining cutting-edge AI with deep understanding of the local healthcare landscape, we help clinics grow while delivering exceptional patient experiences.</p>
             </div>
         </div>
     </section>
