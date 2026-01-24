@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy | Bertos AI</title>
+    <title>Privacy Policy | Bertos - How We Protect Your Data</title>
+    <meta name="description" content="Learn how Bertos protects your data and respects your privacy. Our comprehensive privacy policy covers data collection, usage, security, and your rights.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
@@ -14,8 +15,10 @@
             --accent: #00d4aa;
             --accent-glow: rgba(0, 212, 170, 0.3);
             --white: #ffffff;
+            --gray-50: #f9fafb;
             --gray-100: #f8fafc;
             --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
             --text-primary: #0f172a;
             --text-secondary: #64748b;
         }
@@ -24,11 +27,12 @@
         html { scroll-behavior: smooth; }
         body {
             font-family: 'Outfit', sans-serif;
-            background: var(--white);
+            background: var(--gray-50);
             color: var(--text-primary);
             line-height: 1.6;
         }
 
+        /* Navigation */
         nav {
             position: fixed;
             top: 0; left: 0; right: 0;
@@ -41,48 +45,29 @@
             backdrop-filter: blur(20px);
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            text-decoration: none;
-        }
-
-        .logo-icon {
-            width: 45px; height: 45px;
-            background: linear-gradient(135deg, var(--accent) 0%, #00b894 100%);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 8px 25px var(--accent-glow);
-        }
-
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo-icon { width: 45px; height: 45px; background: linear-gradient(135deg, var(--accent) 0%, #00b894 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
         .logo-icon svg { width: 26px; height: 26px; fill: white; }
         .logo-text { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
-
         .nav-links { display: flex; gap: 2.5rem; align-items: center; }
-        .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: color 0.3s ease; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.3s; }
         .nav-links a:hover { color: var(--accent); }
         .nav-cta { background: var(--accent) !important; color: var(--primary) !important; padding: 0.75rem 1.75rem; border-radius: 50px; font-weight: 600; }
 
+        /* Page Header */
         .page-header {
             padding: 140px 5% 60px;
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             text-align: center;
             position: relative;
         }
-
         .page-header::before {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
             background-size: 60px 60px;
         }
-
         .page-header h1 {
             font-family: 'Playfair Display', serif;
             font-size: clamp(2rem, 4vw, 3rem);
@@ -90,110 +75,265 @@
             margin-bottom: 0.5rem;
             position: relative;
         }
+        .page-header p { color: rgba(255, 255, 255, 0.7); position: relative; }
 
-        .page-header p {
-            color: rgba(255, 255, 255, 0.7);
-            position: relative;
-        }
-
-        .legal-content {
-            padding: 60px 5%;
-            max-width: 800px;
+        /* Main Layout */
+        .privacy-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 3rem;
+            max-width: 1200px;
             margin: 0 auto;
+            padding: 3rem 5%;
         }
 
-        .legal-content h2 {
+        /* Table of Contents Sidebar */
+        .toc-sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+        .toc-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--gray-200);
+        }
+        .toc-card h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+        .toc-link {
+            display: block;
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            border-left: 2px solid transparent;
+            padding-left: 1rem;
+            margin-left: -1rem;
+            transition: all 0.2s;
+        }
+        .toc-link:hover { color: var(--accent); border-left-color: var(--accent); }
+        .toc-link.active { color: var(--accent); border-left-color: var(--accent); font-weight: 500; }
+
+        /* Main Content */
+        .privacy-content {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid var(--gray-200);
+        }
+
+        /* Summary Box */
+        .summary-box {
+            background: linear-gradient(135deg, rgba(0, 212, 170, 0.1), rgba(0, 212, 170, 0.05));
+            border: 1px solid rgba(0, 212, 170, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+        }
+        .summary-box h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        .summary-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        .summary-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--accent);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .summary-icon svg { width: 18px; height: 18px; fill: var(--primary); }
+        .summary-item p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5; }
+        .summary-item strong { color: var(--text-primary); display: block; margin-bottom: 0.25rem; }
+
+        /* Sections */
+        .policy-section {
+            margin-bottom: 2.5rem;
+            padding-bottom: 2.5rem;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        .policy-section:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        
+        .policy-section h2 {
             font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
             color: var(--primary);
-            margin: 2.5rem 0 1rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--gray-200);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
         }
-
-        .legal-content h2:first-of-type {
-            margin-top: 0;
-            padding-top: 0;
-            border-top: none;
+        .section-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, rgba(0, 212, 170, 0.15), rgba(0, 212, 170, 0.05));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
         }
-
-        .legal-content p {
+        .policy-section h3 {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin: 1.5rem 0 0.75rem;
+        }
+        .policy-section p {
             color: var(--text-secondary);
             margin-bottom: 1rem;
             line-height: 1.8;
         }
-
-        .legal-content ul {
+        .policy-section ul, .policy-section ol {
             color: var(--text-secondary);
             margin-bottom: 1rem;
             padding-left: 1.5rem;
         }
+        .policy-section li { margin-bottom: 0.5rem; line-height: 1.7; }
+        .policy-section strong { color: var(--text-primary); }
+        .policy-section a { color: var(--accent); text-decoration: none; }
+        .policy-section a:hover { text-decoration: underline; }
 
-        .legal-content li {
-            margin-bottom: 0.5rem;
-            line-height: 1.7;
-        }
-
-        .legal-content strong {
-            color: var(--text-primary);
-        }
-
-        .highlight-box {
+        /* Info Boxes */
+        .info-box {
             background: var(--gray-100);
             border-left: 4px solid var(--accent);
-            padding: 1.5rem;
+            padding: 1.25rem 1.5rem;
             border-radius: 0 12px 12px 0;
             margin: 1.5rem 0;
         }
-
-        .highlight-box p {
-            margin: 0;
-            color: var(--text-primary);
+        .info-box p { margin: 0; color: var(--text-primary); }
+        .info-box.warning {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(251, 191, 36, 0.05));
+            border-left-color: #f59e0b;
         }
 
-        footer {
-            background: var(--primary);
-            padding: 60px 5% 30px;
+        /* Data Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
         }
+        .data-table th, .data-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        .data-table th {
+            background: var(--gray-100);
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .data-table td { color: var(--text-secondary); }
+        .data-table tr:last-child td { border-bottom: none; }
 
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
+        /* Rights Cards */
+        .rights-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 3rem;
-            margin-bottom: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
         }
-
-        .footer-brand .logo { margin-bottom: 1rem; }
-        .footer-brand .logo-text { color: var(--white); }
-        .footer-brand p { color: rgba(255, 255, 255, 0.6); line-height: 1.7; margin-bottom: 1.5rem; }
-
-        .footer-social { display: flex; gap: 1rem; }
-        .footer-social a { width: 40px; height: 40px; background: rgba(255, 255, 255, 0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; transition: background 0.3s ease; }
-        .footer-social a:hover { background: var(--accent); }
-        .footer-social svg { width: 18px; height: 18px; fill: white; }
-
-        .footer-column h4 { color: var(--white); font-weight: 600; margin-bottom: 1.5rem; }
-        .footer-column a { display: block; color: rgba(255, 255, 255, 0.6); text-decoration: none; margin-bottom: 0.75rem; transition: color 0.3s ease; }
-        .footer-column a:hover { color: var(--accent); }
-
-        .footer-bottom {
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        .right-card {
+            background: var(--gray-100);
+            border-radius: 12px;
+            padding: 1.25rem;
+        }
+        .right-card h4 {
+            color: var(--primary);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
             display: flex;
-            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .right-card p { color: var(--text-secondary); font-size: 0.85rem; margin: 0; }
+
+        /* Contact Card */
+        .contact-card {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        .contact-card h3 {
+            color: var(--white);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+        .contact-card p { color: rgba(255, 255, 255, 0.7); margin-bottom: 1.5rem; }
+        .contact-methods {
+            display: flex;
             flex-wrap: wrap;
             gap: 1rem;
         }
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.75rem 1.25rem;
+            border-radius: 50px;
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+        .contact-method:hover { background: rgba(255, 255, 255, 0.2); }
+        .contact-method svg { width: 18px; height: 18px; fill: var(--accent); }
 
+        /* Footer */
+        footer { background: var(--primary); padding: 60px 5% 30px; }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+        .footer-brand .logo { margin-bottom: 1rem; }
+        .footer-brand .logo-text { color: var(--white); }
+        .footer-brand p { color: rgba(255, 255, 255, 0.6); line-height: 1.7; margin-bottom: 1.5rem; }
+        .footer-social { display: flex; gap: 1rem; }
+        .footer-social a { width: 40px; height: 40px; background: rgba(255, 255, 255, 0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; transition: background 0.3s; }
+        .footer-social a:hover { background: var(--accent); }
+        .footer-social svg { width: 18px; height: 18px; fill: white; }
+        .footer-column h4 { color: var(--white); font-weight: 600; margin-bottom: 1.5rem; }
+        .footer-column a { display: block; color: rgba(255, 255, 255, 0.6); text-decoration: none; margin-bottom: 0.75rem; transition: color 0.3s; }
+        .footer-column a:hover { color: var(--accent); }
+        .footer-bottom { padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
         .footer-bottom p, .footer-bottom a { color: rgba(255, 255, 255, 0.5); font-size: 0.9rem; text-decoration: none; }
-        .footer-bottom a:hover { color: var(--accent); }
 
+        /* Responsive */
+        @media (max-width: 968px) {
+            .privacy-container { grid-template-columns: 1fr; }
+            .toc-sidebar { display: none; }
+        }
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .footer-content { grid-template-columns: 1fr; text-align: center; }
             .footer-social { justify-content: center; }
+            .privacy-content { padding: 2rem 1.5rem; }
+            .summary-grid { grid-template-columns: 1fr; }
+            .contact-methods { flex-direction: column; }
         }
     </style>
 </head>
@@ -201,13 +341,13 @@
     <nav>
         <a href="index.html" class="logo">
             <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
-            <span class="logo-text">Bertos AI</span>
+            <span class="logo-text">Bertos</span>
         </a>
         <div class="nav-links">
-            <a href="index.html#problem">The Problem</a>
             <a href="index.html#solution">Solution</a>
-            <a href="index.html#how-it-works">How It Works</a>
             <a href="index.html#pricing">Pricing</a>
+            <a href="help-center.html">Help Center</a>
+            <a href="terms.html">Terms</a>
             <a href="index.html#contact" class="nav-cta">Get Started</a>
         </div>
     </nav>
@@ -217,112 +357,361 @@
         <p>Last updated: January 2026</p>
     </section>
 
-    <section class="legal-content">
-        <h2>Introduction</h2>
-        <p>Bertos AI ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our AI-powered customer service solutions and visit our website.</p>
-        
-        <div class="highlight-box">
-            <p><strong>Quick Summary:</strong> We collect only the data necessary to provide our services. We never sell your data. We comply with UAE data protection regulations.</p>
-        </div>
+    <div class="privacy-container">
+        <!-- Table of Contents Sidebar -->
+        <aside class="toc-sidebar">
+            <div class="toc-card">
+                <h3>Contents</h3>
+                <a href="#summary" class="toc-link active">Summary</a>
+                <a href="#information-collected" class="toc-link">Information We Collect</a>
+                <a href="#how-we-use" class="toc-link">How We Use Data</a>
+                <a href="#data-sharing" class="toc-link">Data Sharing</a>
+                <a href="#data-security" class="toc-link">Security</a>
+                <a href="#data-retention" class="toc-link">Data Retention</a>
+                <a href="#your-rights" class="toc-link">Your Rights</a>
+                <a href="#cookies" class="toc-link">Cookies</a>
+                <a href="#international" class="toc-link">International Transfers</a>
+                <a href="#children" class="toc-link">Children's Privacy</a>
+                <a href="#changes" class="toc-link">Policy Changes</a>
+                <a href="#contact" class="toc-link">Contact Us</a>
+            </div>
+        </aside>
 
-        <h2>Information We Collect</h2>
-        <p><strong>Information You Provide:</strong></p>
-        <ul>
-            <li>Contact information (name, email, phone number)</li>
-            <li>Business information (clinic name, address, services offered)</li>
-            <li>Payment information (processed securely through third-party providers)</li>
-            <li>Communications with our team</li>
-        </ul>
+        <!-- Main Content -->
+        <main class="privacy-content">
+            <!-- Summary Box -->
+            <div class="summary-box" id="summary">
+                <h2>🔒 Privacy at a Glance</h2>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <div class="summary-icon"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg></div>
+                        <p><strong>Your Data is Protected</strong>All data encrypted in transit and at rest using industry-standard protocols.</p>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
+                        <p><strong>We Never Sell Data</strong>Your information is never sold to third parties for marketing purposes.</p>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-icon"><svg viewBox="0 0 24 24"><path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/></svg></div>
+                        <p><strong>You're in Control</strong>Access, correct, or delete your data at any time upon request.</p>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg></div>
+                        <p><strong>UAE Compliant</strong>We comply with UAE data protection regulations and international standards.</p>
+                    </div>
+                </div>
+            </div>
 
-        <p><strong>Information Collected Automatically:</strong></p>
-        <ul>
-            <li>Device and browser information</li>
-            <li>IP address and location data</li>
-            <li>Website usage analytics</li>
-            <li>Cookies and similar technologies</li>
-        </ul>
+            <!-- Introduction -->
+            <section class="policy-section">
+                <p>Bertos ("we," "our," or "us") is committed to protecting your privacy and the privacy of your patients. This Privacy Policy explains how we collect, use, disclose, and safeguard information when you use our AI-powered customer service solutions for healthcare clinics.</p>
+                <p>By using our services, you agree to the collection and use of information in accordance with this policy. If you do not agree with our policies and practices, please do not use our services.</p>
+            </section>
 
-        <p><strong>Information from AI Assistant Interactions:</strong></p>
-        <ul>
-            <li>Conversation logs between your patients and the AI assistant</li>
-            <li>Appointment booking details</li>
-            <li>Patient inquiries and responses</li>
-        </ul>
+            <!-- Information We Collect -->
+            <section class="policy-section" id="information-collected">
+                <h2><span class="section-icon">📋</span> Information We Collect</h2>
+                
+                <h3>Information You Provide Directly</h3>
+                <p>When you sign up for Bertos or use our services, you may provide us with:</p>
+                <ul>
+                    <li><strong>Account Information:</strong> Name, email address, phone number, job title</li>
+                    <li><strong>Business Information:</strong> Clinic name, address, services offered, pricing, operating hours</li>
+                    <li><strong>Payment Information:</strong> Billing address, payment method details (processed securely through third-party payment processors)</li>
+                    <li><strong>Communications:</strong> Messages you send to our support team, feedback, and survey responses</li>
+                </ul>
 
-        <h2>How We Use Your Information</h2>
-        <p>We use the information we collect to:</p>
-        <ul>
-            <li>Provide, maintain, and improve our AI services</li>
-            <li>Process transactions and send related information</li>
-            <li>Respond to your comments, questions, and requests</li>
-            <li>Train and improve our AI models (using anonymized data only)</li>
-            <li>Send you technical notices, updates, and administrative messages</li>
-            <li>Monitor and analyze trends, usage, and activities</li>
-            <li>Detect, investigate, and prevent fraudulent transactions and abuse</li>
-        </ul>
+                <h3>Information Collected Through AI Interactions</h3>
+                <p>When patients interact with your AI assistant, we collect:</p>
+                <ul>
+                    <li><strong>Conversation Data:</strong> Messages exchanged between patients and the AI assistant</li>
+                    <li><strong>Contact Information:</strong> Phone numbers and names provided by patients</li>
+                    <li><strong>Appointment Details:</strong> Booking requests, preferred times, and service inquiries</li>
+                    <li><strong>Interaction Metadata:</strong> Timestamps, response times, conversation outcomes</li>
+                </ul>
 
-        <h2>Data Sharing and Disclosure</h2>
-        <p>We do not sell your personal information. We may share information in the following circumstances:</p>
-        <ul>
-            <li><strong>Service Providers:</strong> Third parties who perform services on our behalf (payment processing, hosting, analytics)</li>
-            <li><strong>Legal Requirements:</strong> When required by law or to protect rights and safety</li>
-            <li><strong>Business Transfers:</strong> In connection with a merger, acquisition, or sale of assets</li>
-            <li><strong>With Your Consent:</strong> When you have given us permission to share</li>
-        </ul>
+                <div class="info-box">
+                    <p><strong>Important:</strong> We do not collect sensitive medical information through AI conversations. The AI is designed to handle appointment scheduling and general inquiries only, not medical consultations.</p>
+                </div>
 
-        <h2>Data Security</h2>
-        <p>We implement appropriate technical and organizational measures to protect your information, including:</p>
-        <ul>
-            <li>Encryption of data in transit and at rest</li>
-            <li>Regular security assessments and audits</li>
-            <li>Access controls and authentication measures</li>
-            <li>Employee training on data protection</li>
-        </ul>
+                <h3>Information Collected Automatically</h3>
+                <p>When you visit our website or use our dashboard, we automatically collect:</p>
+                <ul>
+                    <li>Device type, browser type, and operating system</li>
+                    <li>IP address and approximate location</li>
+                    <li>Pages visited, time spent, and navigation paths</li>
+                    <li>Referring website and search terms</li>
+                </ul>
+            </section>
 
-        <h2>Data Retention</h2>
-        <p>We retain your information for as long as necessary to provide our services and fulfill the purposes described in this policy. Conversation logs are retained for 12 months unless you request earlier deletion. You may request deletion of your data at any time.</p>
+            <!-- How We Use Your Information -->
+            <section class="policy-section" id="how-we-use">
+                <h2><span class="section-icon">⚙️</span> How We Use Your Information</h2>
+                
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Purpose</th>
+                            <th>Data Used</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Provide Our Services</strong><br>Power your AI assistant to respond to patient inquiries</td>
+                            <td>Business information, conversation data, contact details</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Improve Our AI</strong><br>Enhance response accuracy and capabilities</td>
+                            <td>Anonymized conversation patterns (never identifiable patient data)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Analytics & Reporting</strong><br>Provide you with performance insights</td>
+                            <td>Conversation metadata, booking rates, response times</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Customer Support</strong><br>Respond to your questions and requests</td>
+                            <td>Account information, communications</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Billing & Payments</strong><br>Process subscriptions and invoices</td>
+                            <td>Payment information, billing address</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Security & Fraud Prevention</strong><br>Protect our services and users</td>
+                            <td>IP addresses, usage patterns, device information</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Legal Compliance</strong><br>Meet regulatory requirements</td>
+                            <td>As required by applicable law</td>
+                        </tr>
+                    </tbody>
+                </table>
 
-        <h2>Your Rights</h2>
-        <p>You have the right to:</p>
-        <ul>
-            <li>Access the personal information we hold about you</li>
-            <li>Correct inaccurate or incomplete information</li>
-            <li>Request deletion of your personal information</li>
-            <li>Object to or restrict certain processing</li>
-            <li>Data portability</li>
-            <li>Withdraw consent at any time</li>
-        </ul>
+                <div class="info-box warning">
+                    <p><strong>What We Don't Do:</strong> We never use your patient conversation data to train AI models for other clients. Your data is used only to improve your specific AI assistant's performance.</p>
+                </div>
+            </section>
 
-        <h2>International Data Transfers</h2>
-        <p>Your information may be transferred to and processed in countries other than your country of residence. We ensure appropriate safeguards are in place to protect your information in accordance with this Privacy Policy.</p>
+            <!-- Data Sharing -->
+            <section class="policy-section" id="data-sharing">
+                <h2><span class="section-icon">🤝</span> Data Sharing & Disclosure</h2>
+                
+                <p><strong>We do not sell your personal information or your patients' information to third parties.</strong></p>
+                
+                <p>We may share information only in the following limited circumstances:</p>
+                
+                <h3>Service Providers</h3>
+                <p>We work with trusted third parties who help us operate our services:</p>
+                <ul>
+                    <li><strong>Cloud Infrastructure:</strong> Secure hosting and data storage</li>
+                    <li><strong>Payment Processors:</strong> Secure payment handling (they do not have access to conversation data)</li>
+                    <li><strong>Communication Platforms:</strong> WhatsApp and Instagram (as required to deliver messages)</li>
+                    <li><strong>Analytics Tools:</strong> Website and service performance monitoring</li>
+                </ul>
+                <p>All service providers are contractually bound to protect your data and use it only for the purposes we specify.</p>
 
-        <h2>Children's Privacy</h2>
-        <p>Our services are not intended for individuals under the age of 18. We do not knowingly collect personal information from children.</p>
+                <h3>Legal Requirements</h3>
+                <p>We may disclose information if required by law, court order, or government regulation, or if we believe disclosure is necessary to protect our rights, your safety, or the safety of others.</p>
 
-        <h2>Changes to This Policy</h2>
-        <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the "Last updated" date.</p>
+                <h3>Business Transfers</h3>
+                <p>If Bertos is involved in a merger, acquisition, or sale of assets, your information may be transferred as part of that transaction. We will notify you of any such change and your choices regarding your information.</p>
 
-        <h2>Contact Us</h2>
-        <p>If you have questions about this Privacy Policy or our data practices, please contact us:</p>
-        <ul>
-            <li>Email: privacy@bertosai.com</li>
-            <li>WhatsApp: +971 XX XXX XXXX</li>
-            <li>Address: Dubai, United Arab Emirates</li>
-        </ul>
-    </section>
+                <h3>With Your Consent</h3>
+                <p>We may share information with third parties when you have given us explicit permission to do so.</p>
+            </section>
+
+            <!-- Data Security -->
+            <section class="policy-section" id="data-security">
+                <h2><span class="section-icon">🔐</span> Data Security</h2>
+                
+                <p>We implement comprehensive security measures to protect your information:</p>
+                
+                <ul>
+                    <li><strong>Encryption in Transit:</strong> All data transmitted between your devices and our servers is encrypted using TLS 1.3</li>
+                    <li><strong>Encryption at Rest:</strong> Stored data is encrypted using AES-256 encryption</li>
+                    <li><strong>Access Controls:</strong> Strict role-based access ensures only authorized personnel can access data</li>
+                    <li><strong>Security Monitoring:</strong> 24/7 monitoring for suspicious activity and potential threats</li>
+                    <li><strong>Regular Audits:</strong> Periodic security assessments and penetration testing</li>
+                    <li><strong>Employee Training:</strong> All team members receive data protection training</li>
+                </ul>
+
+                <div class="info-box">
+                    <p><strong>Incident Response:</strong> In the unlikely event of a data breach, we will notify affected clients within 72 hours and take immediate steps to mitigate any potential harm.</p>
+                </div>
+            </section>
+
+            <!-- Data Retention -->
+            <section class="policy-section" id="data-retention">
+                <h2><span class="section-icon">🗄️</span> Data Retention</h2>
+                
+                <p>We retain your information only as long as necessary to provide our services and fulfill the purposes described in this policy:</p>
+                
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Data Type</th>
+                            <th>Retention Period</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Account Information</td>
+                            <td>Duration of your subscription + 30 days</td>
+                        </tr>
+                        <tr>
+                            <td>Conversation Logs</td>
+                            <td>12 months (configurable upon request)</td>
+                        </tr>
+                        <tr>
+                            <td>Analytics Data</td>
+                            <td>24 months</td>
+                        </tr>
+                        <tr>
+                            <td>Payment Records</td>
+                            <td>7 years (legal requirement)</td>
+                        </tr>
+                        <tr>
+                            <td>Support Communications</td>
+                            <td>3 years</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>After your subscription ends, we retain your data for 30 days in case you wish to reactivate. After this period, all data is permanently deleted unless required for legal compliance.</p>
+            </section>
+
+            <!-- Your Rights -->
+            <section class="policy-section" id="your-rights">
+                <h2><span class="section-icon">✋</span> Your Rights</h2>
+                
+                <p>You have the following rights regarding your personal information:</p>
+                
+                <div class="rights-grid">
+                    <div class="right-card">
+                        <h4>📄 Access</h4>
+                        <p>Request a copy of the personal data we hold about you</p>
+                    </div>
+                    <div class="right-card">
+                        <h4>✏️ Correction</h4>
+                        <p>Request correction of inaccurate or incomplete information</p>
+                    </div>
+                    <div class="right-card">
+                        <h4>🗑️ Deletion</h4>
+                        <p>Request deletion of your personal information</p>
+                    </div>
+                    <div class="right-card">
+                        <h4>📦 Portability</h4>
+                        <p>Receive your data in a structured, machine-readable format</p>
+                    </div>
+                    <div class="right-card">
+                        <h4>🚫 Restriction</h4>
+                        <p>Request restriction of processing in certain circumstances</p>
+                    </div>
+                    <div class="right-card">
+                        <h4>❌ Objection</h4>
+                        <p>Object to processing based on legitimate interests</p>
+                    </div>
+                </div>
+
+                <p>To exercise any of these rights, please contact us at <a href="mailto:privacy@bertos.ae">privacy@bertos.ae</a>. We will respond to your request within 30 days.</p>
+            </section>
+
+            <!-- Cookies -->
+            <section class="policy-section" id="cookies">
+                <h2><span class="section-icon">🍪</span> Cookies & Tracking</h2>
+                
+                <p>We use cookies and similar technologies to improve your experience on our website:</p>
+                
+                <h3>Essential Cookies</h3>
+                <p>Required for the website to function properly. These cannot be disabled.</p>
+                
+                <h3>Analytics Cookies</h3>
+                <p>Help us understand how visitors use our website so we can improve it. You can opt out of these through your browser settings.</p>
+                
+                <h3>Marketing Cookies</h3>
+                <p>Used to deliver relevant advertisements. These are only set with your consent.</p>
+                
+                <p>You can control cookies through your browser settings. Note that disabling certain cookies may affect website functionality.</p>
+            </section>
+
+            <!-- International Transfers -->
+            <section class="policy-section" id="international">
+                <h2><span class="section-icon">🌍</span> International Data Transfers</h2>
+                
+                <p>Your information may be transferred to and processed in countries other than your country of residence. These countries may have different data protection laws.</p>
+                
+                <p>When we transfer data internationally, we ensure appropriate safeguards are in place:</p>
+                <ul>
+                    <li>Standard contractual clauses approved by relevant authorities</li>
+                    <li>Data processing agreements with all service providers</li>
+                    <li>Verification that recipients maintain adequate security standards</li>
+                </ul>
+            </section>
+
+            <!-- Children's Privacy -->
+            <section class="policy-section" id="children">
+                <h2><span class="section-icon">👶</span> Children's Privacy</h2>
+                
+                <p>Our services are designed for use by healthcare businesses and are not intended for individuals under 18 years of age. We do not knowingly collect personal information from children.</p>
+                
+                <p>If you believe we have collected information from a child, please contact us immediately at <a href="mailto:privacy@bertos.ae">privacy@bertos.ae</a>, and we will take steps to delete such information.</p>
+            </section>
+
+            <!-- Changes -->
+            <section class="policy-section" id="changes">
+                <h2><span class="section-icon">📝</span> Changes to This Policy</h2>
+                
+                <p>We may update this Privacy Policy from time to time to reflect changes in our practices, technology, legal requirements, or other factors.</p>
+                
+                <p>When we make material changes:</p>
+                <ul>
+                    <li>We will update the "Last updated" date at the top of this page</li>
+                    <li>We will notify you by email at least 30 days before changes take effect</li>
+                    <li>We may display a prominent notice on our website</li>
+                </ul>
+                
+                <p>We encourage you to review this page periodically to stay informed about our privacy practices.</p>
+            </section>
+
+            <!-- Contact -->
+            <section class="policy-section" id="contact">
+                <h2><span class="section-icon">📬</span> Contact Us</h2>
+                
+                <p>If you have questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:</p>
+                
+                <div class="contact-card">
+                    <h3>Privacy Team</h3>
+                    <p>We're committed to addressing your privacy concerns promptly and thoroughly.</p>
+                    <div class="contact-methods">
+                        <a href="mailto:privacy@bertos.ae" class="contact-method">
+                            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                            privacy@bertos.ae
+                        </a>
+                        <a href="https://wa.me/971529818923" class="contact-method">
+                            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
+                            +971 52 981 8923
+                        </a>
+                        <span class="contact-method">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                            Dubai, UAE
+                        </span>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
 
     <footer>
         <div class="footer-content">
             <div class="footer-brand">
                 <a href="index.html" class="logo">
                     <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
-                    <span class="logo-text">Bertos AI</span>
+                    <span class="logo-text">Bertos</span>
                 </a>
                 <p>Helping Dubai clinics capture every patient inquiry with intelligent AI assistants.</p>
                 <div class="footer-social">
-                    <a href="#"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-                    <a href="#"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
-                    <a href="#"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+                    <a href="https://linkedin.com/company/bertos" target="_blank" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+                    <a href="https://instagram.com/bertos.ae" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
                 </div>
             </div>
             <div class="footer-column">
@@ -348,9 +737,48 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2026 Bertos AI. All rights reserved.</p>
-            <div><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+            <p>© 2026 Bertos. All rights reserved.</p>
+            <div>
+                <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a>
+            </div>
         </div>
     </footer>
+
+    <script>
+        // Table of contents active state
+        const tocLinks = document.querySelectorAll('.toc-link');
+        const sections = document.querySelectorAll('.policy-section, .summary-box');
+
+        function updateActiveToc() {
+            let current = 'summary';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveToc);
+
+        // Smooth scroll for TOC links
+        tocLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const target = document.querySelector(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
