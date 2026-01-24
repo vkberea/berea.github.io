@@ -3,159 +3,1132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentation | Bertos AI</title>
+    <title>Documentation | Bertos - AI Assistant Setup & User Guides</title>
+    <meta name="description" content="Complete documentation for Bertos AI assistants. Learn how to set up WhatsApp and Instagram integrations, customize responses, and maximize patient bookings.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #0a1628; --secondary: #162240; --accent: #00d4aa; --accent-glow: rgba(0, 212, 170, 0.3); --white: #ffffff; --gray-100: #f8fafc; --gray-200: #e2e8f0; --text-primary: #0f172a; --text-secondary: #64748b; }
+        :root {
+            --primary: #0a1628;
+            --secondary: #162240;
+            --accent: #00d4aa;
+            --accent-glow: rgba(0, 212, 170, 0.3);
+            --white: #ffffff;
+            --gray-50: #f9fafb;
+            --gray-100: #f8fafc;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+        }
+        
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Outfit', sans-serif; background: var(--white); color: var(--text-primary); line-height: 1.6; }
-        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1.25rem 5%; display: flex; justify-content: space-between; align-items: center; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Outfit', sans-serif; background: var(--gray-50); color: var(--text-primary); line-height: 1.6; }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.25rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
         .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
         .logo-icon { width: 45px; height: 45px; background: linear-gradient(135deg, var(--accent) 0%, #00b894 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
         .logo-icon svg { width: 26px; height: 26px; fill: white; }
         .logo-text { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
         .nav-links { display: flex; gap: 2.5rem; align-items: center; }
-        .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; transition: color 0.3s; }
         .nav-links a:hover { color: var(--accent); }
         .nav-cta { background: var(--accent) !important; color: var(--primary) !important; padding: 0.75rem 1.75rem; border-radius: 50px; font-weight: 600; }
-        .page-header { padding: 140px 5% 60px; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); text-align: center; position: relative; }
-        .page-header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 60px 60px; }
-        .page-header h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); color: var(--white); margin-bottom: 0.5rem; position: relative; }
-        .page-header p { color: rgba(255, 255, 255, 0.7); position: relative; }
         
-        .docs-section { padding: 80px 5%; max-width: 900px; margin: 0 auto; }
-        .docs-section h2 { font-family: 'Playfair Display', serif; font-size: 1.75rem; color: var(--primary); margin-bottom: 1.5rem; }
+        /* Page Header */
+        .page-header {
+            padding: 140px 5% 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            text-align: center;
+            position: relative;
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--white);
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+        .page-header p { color: rgba(255, 255, 255, 0.7); position: relative; max-width: 500px; margin: 0 auto 2rem; }
         
-        .doc-categories { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
-        .doc-card { background: var(--gray-100); border-radius: 16px; padding: 2rem; transition: all 0.3s ease; }
-        .doc-card:hover { transform: translateY(-4px); box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
-        .doc-card span { font-size: 2.5rem; display: block; margin-bottom: 1rem; }
-        .doc-card h3 { color: var(--primary); font-size: 1.25rem; margin-bottom: 0.5rem; }
-        .doc-card p { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1rem; }
-        .doc-card ul { list-style: none; }
-        .doc-card li { color: var(--text-secondary); padding: 0.5rem 0; border-top: 1px solid var(--gray-200); font-size: 0.9rem; }
-        .doc-card li:first-child { border-top: none; }
+        /* Search Box */
+        .search-box {
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 1rem 1.5rem 1rem 3.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-family: 'Outfit', sans-serif;
+            background: var(--white);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+        .search-box input:focus { outline: 2px solid var(--accent); }
+        .search-box svg {
+            position: absolute;
+            left: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            fill: var(--text-secondary);
+        }
         
-        .client-only { background: linear-gradient(135deg, rgba(0, 212, 170, 0.1), rgba(212, 165, 116, 0.1)); border-radius: 20px; padding: 3rem; text-align: center; margin-top: 2rem; }
-        .client-only span { font-size: 3rem; display: block; margin-bottom: 1rem; }
-        .client-only h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--primary); margin-bottom: 1rem; }
-        .client-only p { color: var(--text-secondary); margin-bottom: 1.5rem; max-width: 500px; margin-left: auto; margin-right: auto; }
-        .client-only a { display: inline-block; background: var(--accent); color: var(--primary); padding: 0.875rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 600; }
-
+        /* Main Layout */
+        .docs-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 5%;
+        }
+        
+        /* Sidebar */
+        .docs-sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+        .sidebar-section { margin-bottom: 2rem; }
+        .sidebar-section h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+            padding-left: 1rem;
+        }
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+        }
+        .sidebar-link:hover { background: var(--white); color: var(--accent); }
+        .sidebar-link.active {
+            background: var(--accent);
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .sidebar-link svg { width: 18px; height: 18px; fill: currentColor; opacity: 0.7; }
+        
+        /* Main Content */
+        .docs-content { min-width: 0; }
+        
+        /* Quick Start Cards */
+        .quick-start {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        .quick-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 1px solid var(--gray-200);
+        }
+        .quick-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border-color: var(--accent);
+        }
+        .quick-card-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, rgba(0, 212, 170, 0.1), rgba(0, 212, 170, 0.2));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        .quick-card h3 { color: var(--primary); font-size: 1rem; margin-bottom: 0.25rem; }
+        .quick-card p { color: var(--text-secondary); font-size: 0.85rem; }
+        
+        /* Documentation Sections */
+        .doc-section {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--gray-200);
+        }
+        .doc-section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        .doc-section-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--accent), #00b894);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        .doc-section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        /* Accordion */
+        .doc-accordion { margin-bottom: 0.5rem; }
+        .doc-accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.25rem;
+            background: var(--gray-100);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .doc-accordion-header:hover { background: var(--gray-200); }
+        .doc-accordion-header h4 {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--primary);
+        }
+        .doc-accordion-header svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--text-secondary);
+            transition: transform 0.3s;
+        }
+        .doc-accordion.open .doc-accordion-header svg { transform: rotate(180deg); }
+        .doc-accordion.open .doc-accordion-header { 
+            background: var(--accent); 
+            border-radius: 12px 12px 0 0;
+        }
+        .doc-accordion.open .doc-accordion-header h4 { color: var(--primary); }
+        .doc-accordion.open .doc-accordion-header svg { fill: var(--primary); }
+        
+        .doc-accordion-content {
+            display: none;
+            padding: 1.5rem;
+            background: var(--gray-50);
+            border-radius: 0 0 12px 12px;
+            border: 1px solid var(--gray-200);
+            border-top: none;
+        }
+        .doc-accordion.open .doc-accordion-content { display: block; }
+        .doc-accordion-content p { color: var(--text-secondary); margin-bottom: 1rem; }
+        .doc-accordion-content p:last-child { margin-bottom: 0; }
+        .doc-accordion-content ul, .doc-accordion-content ol {
+            color: var(--text-secondary);
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .doc-accordion-content li { margin-bottom: 0.5rem; }
+        .doc-accordion-content strong { color: var(--text-primary); }
+        
+        /* Code blocks */
+        .code-block {
+            background: var(--primary);
+            color: #e2e8f0;
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        
+        /* Tips and Notes */
+        .tip-box {
+            background: linear-gradient(135deg, rgba(0, 212, 170, 0.1), rgba(0, 212, 170, 0.05));
+            border-left: 4px solid var(--accent);
+            padding: 1rem 1.25rem;
+            border-radius: 0 12px 12px 0;
+            margin: 1rem 0;
+        }
+        .tip-box strong { color: var(--accent); }
+        
+        .warning-box {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(251, 191, 36, 0.05));
+            border-left: 4px solid #f59e0b;
+            padding: 1rem 1.25rem;
+            border-radius: 0 12px 12px 0;
+            margin: 1rem 0;
+        }
+        .warning-box strong { color: #f59e0b; }
+        
+        /* Contact Support */
+        .support-card {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .support-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+        .support-card p { color: rgba(255, 255, 255, 0.7); margin-bottom: 1.5rem; }
+        .support-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .support-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .support-btn.primary { background: var(--accent); color: var(--primary); }
+        .support-btn.secondary { background: rgba(255,255,255,0.1); color: var(--white); border: 1px solid rgba(255,255,255,0.2); }
+        .support-btn:hover { transform: translateY(-2px); }
+        .support-btn svg { width: 18px; height: 18px; fill: currentColor; }
+        
+        /* Footer */
         footer { background: var(--primary); padding: 60px 5% 30px; }
         .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
         .footer-brand .logo { margin-bottom: 1rem; }
         .footer-brand .logo-text { color: var(--white); }
         .footer-brand p { color: rgba(255, 255, 255, 0.6); line-height: 1.7; margin-bottom: 1.5rem; }
         .footer-social { display: flex; gap: 1rem; }
-        .footer-social a { width: 40px; height: 40px; background: rgba(255, 255, 255, 0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+        .footer-social a { width: 40px; height: 40px; background: rgba(255, 255, 255, 0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; transition: background 0.3s; }
         .footer-social a:hover { background: var(--accent); }
         .footer-social svg { width: 18px; height: 18px; fill: white; }
         .footer-column h4 { color: var(--white); font-weight: 600; margin-bottom: 1.5rem; }
-        .footer-column a { display: block; color: rgba(255, 255, 255, 0.6); text-decoration: none; margin-bottom: 0.75rem; }
+        .footer-column a { display: block; color: rgba(255, 255, 255, 0.6); text-decoration: none; margin-bottom: 0.75rem; transition: color 0.3s; }
         .footer-column a:hover { color: var(--accent); }
         .footer-bottom { padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
         .footer-bottom p, .footer-bottom a { color: rgba(255, 255, 255, 0.5); font-size: 0.9rem; text-decoration: none; }
-        @media (max-width: 768px) { .nav-links { display: none; } .footer-content { grid-template-columns: 1fr; text-align: center; } .footer-social { justify-content: center; } }
+        
+        /* Responsive */
+        @media (max-width: 968px) {
+            .docs-container { grid-template-columns: 1fr; }
+            .docs-sidebar { 
+                position: relative; 
+                top: 0;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                background: var(--white);
+                padding: 1rem;
+                border-radius: 16px;
+                margin-bottom: 1rem;
+            }
+            .sidebar-section { margin-bottom: 0; }
+            .sidebar-section h3 { display: none; }
+            .sidebar-link { padding: 0.5rem 1rem; font-size: 0.85rem; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .footer-content { grid-template-columns: 1fr; text-align: center; }
+            .footer-social { justify-content: center; }
+            .quick-start { grid-template-columns: 1fr 1fr; }
+            .support-buttons { flex-direction: column; }
+        }
     </style>
 </head>
 <body>
     <nav>
-        <a href="index.html" class="logo"><div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div><span class="logo-text">Bertos AI</span></a>
-        <div class="nav-links"><a href="index.html#problem">The Problem</a><a href="index.html#solution">Solution</a><a href="index.html#how-it-works">How It Works</a><a href="index.html#pricing">Pricing</a><a href="index.html#contact" class="nav-cta">Get Started</a></div>
+        <a href="index.html" class="logo">
+            <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
+            <span class="logo-text">Bertos</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html#solution">Solution</a>
+            <a href="index.html#how-it-works">How It Works</a>
+            <a href="index.html#pricing">Pricing</a>
+            <a href="help-center.html">Help Center</a>
+            <a href="index.html#contact" class="nav-cta">Get Started</a>
+        </div>
     </nav>
 
-    <section class="page-header"><h1>Documentation</h1><p>Guides and resources for Bertos AI clients</p></section>
-
-    <section class="docs-section">
-        <h2>Quick Start Guides</h2>
-        <div class="doc-categories">
-            <div class="doc-card">
-                <span>🚀</span>
-                <h3>Getting Started</h3>
-                <p>Everything you need to launch your AI assistant</p>
-                <ul>
-                    <li>Onboarding checklist</li>
-                    <li>Providing clinic information</li>
-                    <li>Testing your AI</li>
-                    <li>Going live</li>
-                </ul>
-            </div>
-            <div class="doc-card">
-                <span>💬</span>
-                <h3>WhatsApp Setup</h3>
-                <p>Connect your WhatsApp Business account</p>
-                <ul>
-                    <li>Account requirements</li>
-                    <li>Verification process</li>
-                    <li>Message templates</li>
-                    <li>Best practices</li>
-                </ul>
-            </div>
-            <div class="doc-card">
-                <span>📱</span>
-                <h3>Instagram Setup</h3>
-                <p>Enable AI responses on Instagram DMs</p>
-                <ul>
-                    <li>Connecting your account</li>
-                    <li>Permission settings</li>
-                    <li>Response configuration</li>
-                    <li>Story mentions</li>
-                </ul>
-            </div>
-            <div class="doc-card">
-                <span>📊</span>
-                <h3>Analytics & Reports</h3>
-                <p>Understanding your performance data</p>
-                <ul>
-                    <li>Weekly report overview</li>
-                    <li>Key metrics explained</li>
-                    <li>Conversation insights</li>
-                    <li>ROI calculation</li>
-                </ul>
-            </div>
-            <div class="doc-card">
-                <span>🔧</span>
-                <h3>Customization</h3>
-                <p>Tailoring the AI to your clinic</p>
-                <ul>
-                    <li>Updating responses</li>
-                    <li>Adding new services</li>
-                    <li>Changing pricing info</li>
-                    <li>Handoff rules</li>
-                </ul>
-            </div>
-            <div class="doc-card">
-                <span>🔒</span>
-                <h3>Security & Privacy</h3>
-                <p>How we protect your data</p>
-                <ul>
-                    <li>Data encryption</li>
-                    <li>Compliance overview</li>
-                    <li>Access controls</li>
-                    <li>Data retention</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="client-only">
-            <span>🔐</span>
-            <h3>Full Documentation for Clients</h3>
-            <p>Detailed guides, video tutorials, and API documentation are available to Bertos AI clients. Become a client to get full access.</p>
-            <a href="index.html#contact">Get Started</a>
+    <section class="page-header">
+        <h1>Documentation</h1>
+        <p>Everything you need to set up, customize, and get the most out of your Bertos AI assistant</p>
+        <div class="search-box">
+            <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+            <input type="text" placeholder="Search documentation..." id="docSearch">
         </div>
     </section>
 
+    <div class="docs-container">
+        <!-- Sidebar Navigation -->
+        <aside class="docs-sidebar">
+            <div class="sidebar-section">
+                <h3>Getting Started</h3>
+                <a href="#getting-started" class="sidebar-link active">
+                    <svg viewBox="0 0 24 24"><path d="M13 2.05v2.02c3.95.49 7 3.85 7 7.93 0 3.21-1.92 6-4.72 7.28L13 17v5h5l-1.22-1.22C19.91 18.67 22 15.1 22 12c0-4.97-3.61-9.19-8.5-9.95zM11 22v-2.02c-3.95-.49-7-3.85-7-7.93 0-3.21 1.92-6 4.72-7.28L11 7V2H6l1.22 1.22C4.09 5.33 2 8.9 2 12c0 4.97 3.61 9.19 8.5 9.95z"/></svg>
+                    Quick Start
+                </a>
+                <a href="#onboarding" class="sidebar-link">
+                    <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                    Onboarding
+                </a>
+            </div>
+            <div class="sidebar-section">
+                <h3>Setup Guides</h3>
+                <a href="#whatsapp" class="sidebar-link">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    WhatsApp Setup
+                </a>
+                <a href="#instagram" class="sidebar-link">
+                    <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                    Instagram Setup
+                </a>
+            </div>
+            <div class="sidebar-section">
+                <h3>Using Bertos</h3>
+                <a href="#customization" class="sidebar-link">
+                    <svg viewBox="0 0 24 24"><path d="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z"/></svg>
+                    Customization
+                </a>
+                <a href="#analytics" class="sidebar-link">
+                    <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+                    Analytics
+                </a>
+                <a href="#handoffs" class="sidebar-link">
+                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                    Human Handoffs
+                </a>
+            </div>
+            <div class="sidebar-section">
+                <h3>Reference</h3>
+                <a href="#security" class="sidebar-link">
+                    <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+                    Security
+                </a>
+                <a href="#troubleshooting" class="sidebar-link">
+                    <svg viewBox="0 0 24 24"><path d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"/></svg>
+                    Troubleshooting
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="docs-content">
+            <!-- Quick Start Cards -->
+            <div class="quick-start">
+                <a href="#whatsapp" class="quick-card">
+                    <div class="quick-card-icon">💬</div>
+                    <h3>WhatsApp Setup</h3>
+                    <p>Connect in 15 minutes</p>
+                </a>
+                <a href="#instagram" class="quick-card">
+                    <div class="quick-card-icon">📱</div>
+                    <h3>Instagram Setup</h3>
+                    <p>Enable DM automation</p>
+                </a>
+                <a href="#customization" class="quick-card">
+                    <div class="quick-card-icon">🔧</div>
+                    <h3>Customize AI</h3>
+                    <p>Tailor responses</p>
+                </a>
+                <a href="#analytics" class="quick-card">
+                    <div class="quick-card-icon">📊</div>
+                    <h3>View Analytics</h3>
+                    <p>Track performance</p>
+                </a>
+            </div>
+
+            <!-- Getting Started Section -->
+            <section class="doc-section" id="getting-started">
+                <div class="doc-section-header">
+                    <div class="doc-section-icon">🚀</div>
+                    <h2>Getting Started</h2>
+                </div>
+                
+                <div class="doc-accordion open">
+                    <div class="doc-accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Welcome to Bertos</h4>
+                        <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                    </div>
+                    <div class="doc-accordion-content">
+                        <p>Congratulations on joining Bertos! Your AI assistant is designed to help your clinic capture more patient inquiries, respond instantly 24/7, and book more appointments — all while maintaining your clinic's professional voice.</p>
+                        <p>This documentation will guide you through:</p>
+                        <ul>
+                            <li><strong>Initial setup</strong> — Connecting your WhatsApp and/or Instagram accounts</li>
+                            <li><strong>Customization</strong> — Teaching the AI about your clinic's services, pricing, and policies</li>
+                            <li><strong>Going live</strong> — Testing and launching your AI assistant</li>
+                            <li><strong>Optimization</strong> — Using analytics to improve performance over time</li>
+                        </ul>
+                        <div class="tip-box">
+                            <p><strong>💡 Tip:</strong> Most clinics are fully operational within 3-5 business days of onboarding.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doc-accordion">
+                    <div class="doc-accordion-header" onclick="toggleAccordion(this)">
+                        <h4>What You'll Need</h4>
+                        <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                    </div>
+                    <div class="doc-accordion-content">
+                        <p>Before we begin setup, please have the following ready:</p>
+                        <ul>
+                            <li><strong>WhatsApp Business Account</strong> — A phone number dedicated to your clinic (can be your existing clinic number)</li>
+                            <li><strong>Instagram Business Account</strong> — If you want Instagram DM automation (Professional plan and above)</li>
+                            <li><strong>Clinic Information</strong> — Services list, pricing, opening hours, location, and common patient questions</li>
+                            <li><strong>Admin Access</strong> — You'll need to grant Bertos access to your WhatsApp Business and Instagram accounts</li>
+                        </ul>
+                        <div class="warning-box">
+                            <p><strong>⚠️ Important:</strong> WhatsApp requires a verified business phone number. If you're using a new number, verification can take 24-48 hours.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doc-accordion">
+                    <div class="doc-accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Onboarding Timeline</h4>
+                        <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                    </div>
+                    <div class="doc-accordion-content">
+                        <p>Here's what to expect during your onboarding:</p>
+                        <p><strong>Day 1-2: Information Gathering</strong></p>
+                        <ul>
+                            <li>Complete our clinic questionnaire</li>
+                            <li>Provide services list and pricing</li>
+                            <li>Share common patient questions and preferred answers</li>
+                        </ul>
+                        <p><strong>Day 2-3: AI Configuration</strong></p>
+                        <ul>
+                            <li>We configure your AI with your clinic's information</li>
+                            <li>Set up conversation flows for common scenarios</li>
+                            <li>Configure booking and handoff rules</li>
+                        </ul>
+                        <p><strong>Day 3-4: Testing</strong></p>
+                        <ul>
+                            <li>You receive access to test the AI</li>
+                            <li>Review and provide feedback on responses</li>
+                            <li>We make adjustments based on your input</li>
+                        </ul>
+                        <p><strong>Day 5: Go Live</strong></p>
+                        <ul>
+                            <li>Final approval from you</li>
+                            <li>AI assistant goes live on your channels</li>
+                            <li>We monitor closely for the first 48 hours</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- WhatsApp Setup Section -->
+            <section class="doc-section" id="whatsapp">
+                <div class="doc-section-header">
+                    <div class="doc-section-icon">💬</div>
+                    <h2>WhatsApp Business Setup</h2>
+                </div>
+
+                <div class="doc-accordion">
+                    <div class="doc-accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Prerequisites</h4>
+                        <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                    </div>
+                    <div class="doc-accordion-content">
+                        <p>Before connecting WhatsApp, ensure you have:</p>
+                        <ul>
+                            <li>A <strong>WhatsApp Business Account</strong> (not regular WhatsApp)</li>
+                            <li>A <strong>verified phone number</strong> for your clinic</li>
+                            <li>Access to the phone to receive a verification code</li>
+                            <li>A <strong>Facebook Business Manager</strong> account (we'll help you set this up if needed)</li>
+                        </ul>
+                        <div class="tip-box">
+                            <p><strong>💡 Tip:</strong> You can use your existing clinic WhatsApp number. The AI will handle messages alongside your team, or you can configure it to handle all messages.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doc-accordion">
+                    <div class="doc-accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Step 1: Connect Your Account</h4>
+                        <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                    </div>
+                    <div class="doc-accordion-content">
+                        <p>Your Bertos account manager will send you a secure connection link. Here's what happens:</p>
+                        <ol>
+                            <li>Click the connection link in your email</li>
+                            <li>Log in to your Facebook Business Manager</li>
+                            <li>Select your WhatsApp Business Account</li>
+                            <li>Grant Bertos permission to send and receive messages</li>
+                            <li>Verify your phone number if prompted</li>
+                        </ol>
+                        <p>The entire process takes about 5-10 minutes.</p>
+                        <div class="warning-box">
+                            <p><strong>⚠️ Important:</strong> Only grant access through official links from your Bertos account manager. We will never ask for your WhatsApp password.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doc-accordion">
+                    <div class="doc-accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Step 2: Configure Message Templates</h4>
+                        <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                    </div>
+                    <div class="doc-accordion-content">
+                        <p>WhatsApp requires pre-approved templates for certain message types. We'll set up templates for:</p>
+                        <ul>
+                            <li><strong>Appointment Confirmations</strong> — Sent when a patient books</li>
+                            <li><strong>Appointment Reminders</strong> — Sent 24 hours before appointments</li>
+                            <li><strong>Follow-up Messages</strong> — Re-engage patients who didn't book</li>
+                        </ul>
+                        <p>Template approval typically takes 24-48 hours. We handle the submission process for you.</p>
+                    </div>
+                </div>
+
+                <div class="doc-accordion">
+                    <div class="doc-accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Step 3: Test Your Connection</h4>
+                        <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                    </div>
+                    <div class="doc-accordion-content">
+                        <p>Once connected, test your setup:</p>
+                        <ol>
+                            <li>Send a WhatsApp message to your clinic number from a personal phone</li>
+                            <li>You should receive an automated response within seconds</li>
+                            <li>Try asking about services, pricing, and appointment availability</li>
+                            <li>Test the human handoff by asking to speak to a person</li>
+                        </ol>
+                        <div class="tip-box">
+                            <p><strong>💡 Tip:</strong> Test in both English and Arabic (if bilingual is enabled) to ensure both languages work correctly.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Instagram Setup Section -->
+            <section class="doc-section" id="instagram">
+                <div class="doc-section-header">
+                    <div class="doc-section-icon">📱</div>
+                    <h2>Instagram Setup</h2>
+                </div>
+
+                <div class="doc-accordion">
+                    <div class="doc-accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Prerequisites</h4>
+                        <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                    </div>
+                    <div class="doc-accordion-content">
+                        <p>Instagram automation requires:</p>
+                        <ul>
+                            <li>An <strong>Instagram Business or Creator Account</strong></li>
+                            <li>Your Instagram account must be <strong>connected to a Facebook Page</strong></li>
+                            <li>You must have <strong>admin access</strong> to the Facebook Page</li>
+                            <li><strong>Professional or Premium</strong> Bertos plan</li>
+                        </ul>
+                        <p>If your Instagram isn't connected to Facebook, follow these steps:</p>
+                        <ol>
+                            <li>Open Instagram → Settings → Account</li>
+                            <li>Tap "Linked Accounts"</li>
+                            <li>Select Facebook and connect your Page</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="doc-accordion">
+                    <div class="doc-accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Connecting Your Account</h4>
+                        <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                    </div>
+                    <div class="doc-accordion-content">
+                        <p>The connection process is similar to WhatsApp:</p>
+                        <ol>
+                            <li>Click the Instagram connection link from your account manager</li>
+                            <li>Log in to Facebook Business Manager</li>
+                            <li>Select your Instagram account</li>
+                            <li>Grant Bertos permission to access messages</li>
+                        </ol>
+                        <div class="tip-box">
+                            <p><strong>💡 Tip:</strong> Instagram automation works for DMs, story mentions, and comment replies (coming soon).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doc-accordion">
+                    <div class="doc-accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Story Mention Responses</h4>
+                        <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                    </div>
+                    <div class="doc-accordion-content">
+                        <p>When someone mentions your clinic in their Instagram story, the AI can automatically send them a thank-you DM. This is a powerful way to engage patients who are already advocating for your clinic.</p>
+                        <p>Default story mention response:</p>
+                        <div class="code-block">
+"Thanks so much for the mention! 😊 We're thrilled you had a great experience. If you ever need anything or want to book your next appointment, just message us here!"
+                        </div>
+                        <p>You can customize this message during onboarding.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Customization Section -->
+            <section class="doc-section" id="customization">
+                <div class="doc-section-header">
+                    <div class="doc-section-icon">🔧</div>
+                    <h2>Customizing Your AI</h2>
+                </div>
+
+                <div class="doc-accordion">
+                    <div class="doc-accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Response Style & Tone</h4>
+                        <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                    </div>
+                    <div class="doc-accordion-content">
+                        <p>Your AI assistant adopts your clinic's voice. During onboarding, you can specify:</p>
+                        <ul>
+                            <li><strong>Formality level</strong> — Professional, friendly, or casual</li>
+                            <li><strong>Emoji usage</strong> — None, minimal, or moderate</li>
+                            <li><strong>Response length</strong> — Concise or detailed</li>
+                            <li><strong>Greeting style</strong> — Your preferred welcome message</li>
+                        </ul>
+                        <p>Example tone options:</p>
+                        <p><em>Professional:</em> "Thank you for contacting Marina Dental Clinic. I'd be happy to help you with information about our services."</p>
+                        <p><em>Friendly:</em> "Hi there! 👋 Thanks for reaching out to Marina Dental. How can I help you today?"</p>
+                    </div>
+                </div>
+
+                <div class="doc-accordion">
+                    <div class="doc-accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Updating Services & Pricing</h4>
+                        <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                    </div>
+                    <div class="doc-accordion-content">
+                        <p>Need to update your services or pricing? Here's how:</p>
+                        <p><strong>Option 1: Email Your Account Manager</strong></p>
+                        <p>Send the updated information to your dedicated account manager. Changes are typically implemented within 24 hours.</p>
+                        <p><strong>Option 2: Use the Client Portal (Coming Soon)</strong></p>
+                        <p>We're building a self-service portal where you can update information instantly. Stay tuned!</p>
+                        <div class="warning-box">
+                            <p><strong>⚠️ Important:</strong> Always notify us of pricing changes before updating your website to ensure consistency.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doc-accordion">
+                    <div class="doc-accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Adding New FAQs</h4>
+                        <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                    </div>
+                    <div class="doc-accordion-content">
+                        <p>If patients are asking questions your AI can't answer well, you can add new FAQs:</p>
+                        <ol>
+                            <li>Identify the question patients are asking</li>
+                            <li>Write your preferred answer</li>
+                            <li>Email both to your account manager</li>
+                            <li>We'll train the AI with the new information</li>
+                        </ol>
+                        <div class="tip-box">
+                            <p><strong>💡 Tip:</strong> Check your weekly analytics report for "unanswered questions" — these are great candidates for new FAQs.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analytics Section -->
+            <section class="doc-section" id="analytics">
+                <div class="doc-section-header">
+                    <div class="doc-section-icon">📊</div>
+                    <h2>Analytics & Reporting</h2>
+                </div>
+
+                <div class="doc-accordion">
+                    <div class="doc-accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Weekly Performance Reports</h4>
+                        <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                    </div>
+                    <div class="doc-accordion-content">
+                        <p>Every week, you'll receive a performance report including:</p>
+                        <ul>
+                            <li><strong>Total conversations</strong> — How many patients contacted you</li>
+                            <li><strong>Response time</strong> — Average time to first response</li>
+                            <li><strong>Resolution rate</strong> — % of conversations handled without human intervention</li>
+                            <li><strong>Booking rate</strong> — % of conversations that resulted in appointments</li>
+                            <li><strong>Peak hours</strong> — When patients are most active</li>
+                            <li><strong>Language breakdown</strong> — English vs Arabic conversations</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="doc-accordion">
+                    <div class="doc-accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Key Metrics Explained</h4>
+                        <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                    </div>
+                    <div class="doc-accordion-content">
+                        <p><strong>Response Time:</strong> The time between a patient's message and the AI's first response. Target: under 10 seconds.</p>
+                        <p><strong>Resolution Rate:</strong> Percentage of conversations where the AI fully addressed the patient's needs without requiring human intervention. A healthy rate is 70-85%.</p>
+                        <p><strong>Handoff Rate:</strong> Percentage of conversations transferred to your human team. Some handoffs are expected and healthy (complex cases, complaints, etc.).</p>
+                        <p><strong>Booking Conversion:</strong> Percentage of conversations that result in a booked appointment. This is your most important metric for ROI calculation.</p>
+                    </div>
+                </div>
+
+                <div class="doc-accordion">
+                    <div class="doc-accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Calculating Your ROI</h4>
+                        <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                    </div>
+                    <div class="doc-accordion-content">
+                        <p>Here's how to calculate the return on your Bertos investment:</p>
+                        <p><strong>Step 1:</strong> Find your average patient value (total revenue ÷ number of patients)</p>
+                        <p><strong>Step 2:</strong> Multiply by new bookings from Bertos</p>
+                        <p><strong>Step 3:</strong> Subtract your monthly Bertos fee</p>
+                        <div class="code-block">
+Example:
+Average patient value: AED 1,500
+New bookings this month: 25
+Revenue from Bertos: 25 × 1,500 = AED 37,500
+Monthly Bertos fee: AED 3,500
+Net ROI: AED 34,000 (10.7x return)
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Human Handoffs Section -->
+            <section class="doc-section" id="handoffs">
+                <div class="doc-section-header">
+                    <div class="doc-section-icon">🤝</div>
+                    <h2>Human Handoffs</h2>
+                </div>
+
+                <div class="doc-accordion">
+                    <div class="doc-accordion-header" onclick="toggleAccordion(this)">
+                        <h4>When Does the AI Hand Off?</h4>
+                        <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                    </div>
+                    <div class="doc-accordion-content">
+                        <p>The AI is configured to hand off to your human team when:</p>
+                        <ul>
+                            <li>A patient explicitly asks to speak to a person</li>
+                            <li>The conversation involves a complaint or negative sentiment</li>
+                            <li>The AI doesn't know the answer after 2 attempts</li>
+                            <li>The patient has a medical emergency (AI directs to emergency services first)</li>
+                            <li>Complex insurance or billing questions arise</li>
+                        </ul>
+                        <p>You can customize these triggers based on your preferences.</p>
+                    </div>
+                </div>
+
+                <div class="doc-accordion">
+                    <div class="doc-accordion-header" onclick="toggleAccordion(this)">
+                        <h4>How Handoffs Work</h4>
+                        <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                    </div>
+                    <div class="doc-accordion-content">
+                        <p>When a handoff is triggered:</p>
+                        <ol>
+                            <li>The AI informs the patient that a team member will respond shortly</li>
+                            <li>Your team receives a notification (WhatsApp, email, or both)</li>
+                            <li>The full conversation history is included for context</li>
+                            <li>Your team responds directly through WhatsApp/Instagram</li>
+                            <li>The AI stays silent until you indicate the conversation is resolved</li>
+                        </ol>
+                        <div class="tip-box">
+                            <p><strong>💡 Tip:</strong> Set up a dedicated WhatsApp group or Slack channel for handoff notifications so nothing falls through the cracks.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Security Section -->
+            <section class="doc-section" id="security">
+                <div class="doc-section-header">
+                    <div class="doc-section-icon">🔒</div>
+                    <h2>Security & Privacy</h2>
+                </div>
+
+                <div class="doc-accordion">
+                    <div class="doc-accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Data Protection</h4>
+                        <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                    </div>
+                    <div class="doc-accordion-content">
+                        <p>We take data security seriously:</p>
+                        <ul>
+                            <li><strong>Encryption:</strong> All data is encrypted in transit (TLS 1.3) and at rest (AES-256)</li>
+                            <li><strong>Access Control:</strong> Only authorized Bertos staff can access your data, and only when necessary for support</li>
+                            <li><strong>Data Location:</strong> All data is stored in secure cloud infrastructure</li>
+                            <li><strong>No Training on Your Data:</strong> We never use your patient conversations to train AI models</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="doc-accordion">
+                    <div class="doc-accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Compliance</h4>
+                        <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                    </div>
+                    <div class="doc-accordion-content">
+                        <p>Bertos is designed with healthcare compliance in mind:</p>
+                        <ul>
+                            <li>Compliant with UAE data protection regulations</li>
+                            <li>Patient data is never shared with third parties for marketing</li>
+                            <li>You retain full ownership of your patient data</li>
+                            <li>Data deletion available upon request</li>
+                        </ul>
+                        <p>For detailed information, see our <a href="privacy.html">Privacy Policy</a>.</p>
+                    </div>
+                </div>
+
+                <div class="doc-accordion">
+                    <div class="doc-accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Data Retention</h4>
+                        <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                    </div>
+                    <div class="doc-accordion-content">
+                        <p>By default, conversation data is retained for:</p>
+                        <ul>
+                            <li><strong>Active conversations:</strong> Indefinitely while you're a client</li>
+                            <li><strong>Analytics data:</strong> 24 months</li>
+                            <li><strong>After cancellation:</strong> 30 days, then permanently deleted</li>
+                        </ul>
+                        <p>You can request earlier deletion at any time by contacting your account manager.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Troubleshooting Section -->
+            <section class="doc-section" id="troubleshooting">
+                <div class="doc-section-header">
+                    <div class="doc-section-icon">🔧</div>
+                    <h2>Troubleshooting</h2>
+                </div>
+
+                <div class="doc-accordion">
+                    <div class="doc-accordion-header" onclick="toggleAccordion(this)">
+                        <h4>AI Not Responding</h4>
+                        <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                    </div>
+                    <div class="doc-accordion-content">
+                        <p>If your AI isn't responding to messages:</p>
+                        <ol>
+                            <li><strong>Check your connection status</strong> in your Bertos dashboard (if available) or contact support</li>
+                            <li><strong>Verify WhatsApp Business</strong> is still connected to your Facebook Business Manager</li>
+                            <li><strong>Test from a different phone</strong> to rule out issues with a specific device</li>
+                            <li><strong>Check for WhatsApp outages</strong> at status.whatsapp.com</li>
+                        </ol>
+                        <p>If the issue persists, contact support immediately.</p>
+                    </div>
+                </div>
+
+                <div class="doc-accordion">
+                    <div class="doc-accordion-header" onclick="toggleAccordion(this)">
+                        <h4>AI Giving Wrong Information</h4>
+                        <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                    </div>
+                    <div class="doc-accordion-content">
+                        <p>If the AI is providing incorrect information:</p>
+                        <ol>
+                            <li><strong>Screenshot the conversation</strong> showing the incorrect response</li>
+                            <li><strong>Note what the correct answer should be</strong></li>
+                            <li><strong>Email your account manager</strong> with both pieces of information</li>
+                            <li><strong>We'll update the AI</strong> within 24 hours</li>
+                        </ol>
+                        <div class="tip-box">
+                            <p><strong>💡 Tip:</strong> If it's urgent (e.g., wrong pricing being quoted), call or WhatsApp our support line for immediate assistance.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doc-accordion">
+                    <div class="doc-accordion-header" onclick="toggleAccordion(this)">
+                        <h4>Not Receiving Handoff Notifications</h4>
+                        <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                    </div>
+                    <div class="doc-accordion-content">
+                        <p>If you're missing handoff notifications:</p>
+                        <ul>
+                            <li>Check your spam/junk folder for email notifications</li>
+                            <li>Verify the notification phone number/email is correct in your settings</li>
+                            <li>Ensure WhatsApp notifications are enabled on your device</li>
+                            <li>Check if your team's phones have Do Not Disturb enabled</li>
+                        </ul>
+                        <p>Contact support to verify your notification settings are configured correctly.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Support Card -->
+            <div class="support-card">
+                <h3>Need Help?</h3>
+                <p>Our support team is available Sunday through Thursday, 9 AM to 6 PM GST.</p>
+                <div class="support-buttons">
+                    <a href="https://wa.me/971529818923" class="support-btn primary">
+                        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
+                        WhatsApp Support
+                    </a>
+                    <a href="mailto:support@bertos.ae" class="support-btn secondary">
+                        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                        Email Support
+                    </a>
+                </div>
+            </div>
+        </main>
+    </div>
+
     <footer>
         <div class="footer-content">
-            <div class="footer-brand"><a href="index.html" class="logo"><div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div><span class="logo-text">Bertos AI</span></a><p>Helping Dubai clinics capture every patient inquiry with intelligent AI assistants.</p><div class="footer-social"><a href="#"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a href="#"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a><a href="#"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></div></div>
-            <div class="footer-column"><h4>Product</h4><a href="index.html#solution">Features</a><a href="index.html#pricing">Pricing</a><a href="index.html#how-it-works">How It Works</a><a href="case-studies.html">Case Studies</a></div>
-            <div class="footer-column"><h4>Company</h4><a href="about.html">About</a><a href="blog.html">Blog</a><a href="careers.html">Careers</a><a href="contact.html">Contact</a></div>
-            <div class="footer-column"><h4>Support</h4><a href="help-center.html">Help Center</a><a href="documentation.html">Documentation</a><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a></div>
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
+                    <span class="logo-text">Bertos</span>
+                </a>
+                <p>Helping Dubai clinics capture every patient inquiry with intelligent AI assistants.</p>
+                <div class="footer-social">
+                    <a href="https://linkedin.com/company/bertos" target="_blank" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+                    <a href="https://instagram.com/bertos.ae" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Product</h4>
+                <a href="index.html#solution">Features</a>
+                <a href="index.html#pricing">Pricing</a>
+                <a href="index.html#how-it-works">How It Works</a>
+                <a href="case-studies.html">Case Studies</a>
+            </div>
+            <div class="footer-column">
+                <h4>Company</h4>
+                <a href="about.html">About</a>
+                <a href="blog.html">Blog</a>
+                <a href="careers.html">Careers</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-column">
+                <h4>Support</h4>
+                <a href="help-center.html">Help Center</a>
+                <a href="documentation.html">Documentation</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+            </div>
         </div>
-        <div class="footer-bottom"><p>© 2026 Bertos AI. All rights reserved.</p><div><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div></div>
+        <div class="footer-bottom">
+            <p>© 2026 Bertos. All rights reserved.</p>
+            <div>
+                <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a>
+            </div>
+        </div>
     </footer>
+
+    <script>
+        // Accordion functionality
+        function toggleAccordion(header) {
+            const accordion = header.parentElement;
+            const wasOpen = accordion.classList.contains('open');
+            
+            // Close all accordions in the same section
+            const section = accordion.closest('.doc-section');
+            section.querySelectorAll('.doc-accordion').forEach(acc => {
+                acc.classList.remove('open');
+            });
+            
+            // Toggle the clicked one
+            if (!wasOpen) {
+                accordion.classList.add('open');
+            }
+        }
+
+        // Sidebar active state
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
+        const sections = document.querySelectorAll('.doc-section');
+
+        function updateActiveLink() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            sidebarLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveLink);
+
+        // Smooth scroll for sidebar links
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const target = document.querySelector(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Quick card links
+        document.querySelectorAll('.quick-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const target = document.querySelector(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Search functionality (basic filter)
+        const searchInput = document.getElementById('docSearch');
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            const accordions = document.querySelectorAll('.doc-accordion');
+            
+            accordions.forEach(accordion => {
+                const text = accordion.textContent.toLowerCase();
+                if (query === '' || text.includes(query)) {
+                    accordion.style.display = 'block';
+                } else {
+                    accordion.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
