@@ -489,29 +489,28 @@
         <div class="nav-links">
             <a href="index.html#problem">The Problem</a>
             <a href="index.html#solution">Solution</a>
-            <a href="index.html#how-it-works">How It Works</a>
             <a href="patient-journey.html">Patient Journey</a>
             <a href="index.html#pricing">Pricing</a>
             <a href="index.html#contact" class="nav-cta">Get Started</a>
         </div>
-
-        <div class="mobile-menu-btn" id="mobileMenuBtn" onclick="toggleMobileMenu()">
+        <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="Toggle menu">
             <span></span>
             <span></span>
             <span></span>
-        </div>
+        </button>
     </nav>
 
-    <!-- Mobile Menu Overlay -->
-    <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="toggleMobileMenu()"></div>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
     <div class="mobile-menu" id="mobileMenu">
-        <a href="index.html#problem" onclick="toggleMobileMenu()">The Problem</a>
-        <a href="index.html#solution" onclick="toggleMobileMenu()">Solution</a>
+        <a href="index.html#problem">The Problem</a>
+        <a href="index.html#solution">Solution</a>
         <a href="patient-journey.html">Patient Journey</a>
-        <a href="index.html#pricing" onclick="toggleMobileMenu()">Pricing</a>
-        <a href="index.html#contact" class="nav-cta" onclick="toggleMobileMenu()">Get Started</a>
+        <a href="index.html#pricing">Pricing</a>
+        <a href="index.html#contact" class="nav-cta">Get Started</a>
     </div>
 
+</div>
 
     <!-- Page Header -->
     <section class="page-header">
@@ -656,4 +655,42 @@
         <div class="footer-bottom">
             <p>© 2026 Bertos. All rights reserved.</p>
             <div>
-                <a href="privacy.html"
+                <a href="privacy.html"">Privacy</a> · <a href="terms.html">Terms</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+
+        function toggleMobileMenu() {
+            mobileMenuBtn.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            mobileMenuOverlay.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        mobileMenuOverlay.addEventListener('click', toggleMobileMenu);
+
+        // Close menu when clicking a link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (mobileMenu.classList.contains('active')) {
+                    toggleMobileMenu();
+                }
+            });
+        });
+
+        // Close on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                toggleMobileMenu();
+            }
+        });
+    </script>
+</body>
+</html>
