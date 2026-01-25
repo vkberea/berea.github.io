@@ -774,21 +774,29 @@
         .mobile-menu-btn {
             display: none;
             flex-direction: column;
-            gap: 5px;
+            justify-content: center;
+            align-items: center;
+            width: 44px;
+            height: 44px;
+            background: transparent;
+            border: none;
             cursor: pointer;
             padding: 10px;
             z-index: 1002;
+            gap: 6px;
         }
 
         .mobile-menu-btn span {
-            width: 25px;
+            display: block;
+            width: 24px;
             height: 2px;
             background: var(--primary);
             transition: all 0.3s ease;
+            border-radius: 2px;
         }
 
         .mobile-menu-btn.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
+            transform: rotate(45deg) translate(6px, 6px);
         }
 
         .mobile-menu-btn.active span:nth-child(2) {
@@ -796,7 +804,7 @@
         }
 
         .mobile-menu-btn.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
+            transform: rotate(-45deg) translate(6px, -6px);
         }
 
         /* Mobile Menu Overlay */
@@ -806,11 +814,11 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(10, 22, 40, 0.8);
+            background: rgba(10, 22, 40, 0.7);
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
-            z-index: 999;
+            z-index: 998;
         }
 
         .mobile-menu-overlay.active {
@@ -825,14 +833,15 @@
             right: -300px;
             width: 280px;
             height: 100vh;
+            height: 100dvh;
             background: var(--white);
-            padding: 100px 30px 30px;
+            padding: 100px 24px 40px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
             transition: right 0.3s ease;
-            z-index: 1001;
-            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.15);
+            overflow-y: auto;
         }
 
         .mobile-menu.active {
@@ -844,7 +853,7 @@
             text-decoration: none;
             font-weight: 500;
             font-size: 1.1rem;
-            padding: 15px 0;
+            padding: 16px 0;
             border-bottom: 1px solid var(--gray-200);
             transition: color 0.3s ease;
         }
@@ -853,14 +862,15 @@
             color: var(--accent);
         }
 
+        .mobile-menu a:last-child {
+            border-bottom: none;
+        }
+
         .mobile-menu .nav-cta {
-            background: var(--accent);
-            color: var(--primary) !important;
-            padding: 15px 25px;
-            border-radius: 50px;
-            text-align: center;
             margin-top: 20px;
-            border: none;
+            text-align: center;
+            border-bottom: none;
+            border-radius: 50px;
         }
     </style>
 </head>
@@ -871,33 +881,30 @@
             <div class="logo-icon">
                 <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
             </div>
-            <div>
-                <span class="logo-text">Bertos</span>
-                <p class="logo-tagline">Never Lose Patients</p>
-            </div>
+            <span class="logo-text">Bertos</span>
         </a>
-        <div class="nav-links" id="navLinks">
+        <div class="nav-links">
             <a href="index.html#problem">The Problem</a>
             <a href="index.html#solution">Solution</a>
             <a href="index.html#pricing">Pricing</a>
             <a href="about.html">About</a>
             <a href="index.html#contact" class="nav-cta">Get Started</a>
         </div>
-        <div class="mobile-menu-btn" id="mobileMenuBtn" onclick="toggleMobileMenu()">
+        <button class="mobile-menu-btn" id="mobileMenuBtn" type="button" aria-label="Toggle menu">
             <span></span>
             <span></span>
             <span></span>
-        </div>
+        </button>
     </nav>
 
-    <!-- Mobile Menu Overlay -->
-    <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="toggleMobileMenu()"></div>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
     <div class="mobile-menu" id="mobileMenu">
-        <a href="index.html#problem" onclick="toggleMobileMenu()">The Problem</a>
-        <a href="index.html#solution" onclick="toggleMobileMenu()">Solution</a>
-        <a href="index.html#pricing" onclick="toggleMobileMenu()">Pricing</a>
+        <a href="index.html#problem">The Problem</a>
+        <a href="index.html#solution">Solution</a>
+        <a href="index.html#pricing">Pricing</a>
         <a href="about.html">About</a>
-        <a href="index.html#contact" class="nav-cta" onclick="toggleMobileMenu()">Get Started</a>
+        <a href="index.html#contact" class="nav-cta">Get Started</a>
     </div>
 
     <!-- Page Header -->
@@ -1042,22 +1049,36 @@
     </footer>
 
     <script>
-        // Mobile Menu Toggle
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+
         function toggleMobileMenu() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-            
-            mobileMenu.classList.toggle('active');
             mobileMenuBtn.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
             mobileMenuOverlay.classList.toggle('active');
-            
-            if (mobileMenu.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = '';
-            }
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
         }
+
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        mobileMenuOverlay.addEventListener('click', toggleMobileMenu);
+
+        // Close menu when clicking a link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (mobileMenu.classList.contains('active')) {
+                    toggleMobileMenu();
+                }
+            });
+        });
+
+        // Close on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                toggleMobileMenu();
+            }
+        });
 
         // Scenario data
         const scenarios = {
