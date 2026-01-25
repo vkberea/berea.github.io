@@ -2023,41 +2023,13 @@
                             }
                         }, 30);
                     }
-                    statsObserver.unobserve(target);">Privacy</a> · <a href="terms.html">Terms</a>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Mobile Menu
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-
-        function toggleMobileMenu() {
-            mobileMenuBtn.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
-            mobileMenuOverlay.classList.toggle('active');
-            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
-        }
-
-        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
-        mobileMenuOverlay.addEventListener('click', toggleMobileMenu);
-
-        // Close menu when clicking a link
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (mobileMenu.classList.contains('active')) {
-                    toggleMobileMenu();
+                    statsObserver.unobserve(target);
                 }
             });
-        });
+        }, observerOptions);
 
-        // Close on escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
-                toggleMobileMenu();
-            }
+        statNumbers.forEach(el => {
+            statsObserver.observe(el);
         });
     </script>
 </body>
