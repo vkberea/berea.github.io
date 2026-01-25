@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Journey | Bertos - Never Lose Patients</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a1628;
+            --secondary: #162240;
+            --accent: #00d4aa;
+            --accent-glow: rgba(0, 212, 170, 0.3);
+            --accent-light: #e6faf5;
+            --gold: #d4a574;
+            --white: #ffffff;
+            --gray-100: #f8fafc;
+            --gray-200: #e2e8f0;
+            --gray-400: #94a3b8;
+            --gray-600: #475569;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--gray-100);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.25rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--accent) 0%, #00b894 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px var(--accent-glow);
+        }
+
+        .logo-icon svg { width: 26px; height: 26px; fill: white; }
+        .logo-text { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+        .logo-tagline { font-size: 0.7rem; color: var(--text-secondary); margin-top: -2px; }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        .nav-cta {
+            background: var(--accent) !important;
+            color: var(--primary) !important;
+            padding: 0.75rem 1.75rem;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 4px 20px var(--accent-glow);
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 140px 5% 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            color: var(--white);
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .page-header h1 span { color: var(--accent); }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Interactive Controls */
+        .controls-section {
+            background: var(--white);
+            padding: 30px 5%;
+            border-bottom: 1px solid var(--gray-200);
+            position: sticky;
+            top: 80px;
+            z-index: 100;
+        }
+
+        .controls-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .scenario-btn {
+            padding: 12px 24px;
+            border: 2px solid var(--gray-200);
+            border-radius: 50px;
+            background: var(--white);
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .scenario-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .scenario-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--primary);
+            box-shadow: 0 4px 20px var(--accent-glow);
+        }
+
+        .scenario-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        /* Main Flow Container */
+        .flow-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 5%;
+        }
+
+        /* Phone Mockup */
+        .phone-section {
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .phone-mockup {
+            position: sticky;
+            top: 200px;
+            background: var(--primary);
+            border-radius: 40px;
+            padding: 12px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+        }
+
+        .phone-screen {
+            background: var(--white);
+            border-radius: 30px;
+            height: 680px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .phone-header {
+            background: linear-gradient(135deg, var(--accent) 0%, #00b894 100%);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .phone-avatar {
+            width: 45px;
+            height: 45px;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .phone-clinic-info h3 {
+            color: var(--white);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .phone-clinic-info p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.75rem;
+        }
+
+        .chat-container {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            background: #f0f2f5;
+        }
+
+        .message {
+            max-width: 85%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            animation: messageIn 0.3s ease;
+            position: relative;
+        }
+
+        @keyframes messageIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.bot {
+            background: var(--white);
+            color: var(--text-primary);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .message.user {
+            background: var(--accent);
+            color: var(--primary);
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message-time {
+            font-size: 0.65rem;
+            color: var(--text-secondary);
+            margin-top: 4px;
+            display: block;
+        }
+
+        .message.user .message-time {
+            color: rgba(10, 22, 40, 0.6);
+            text-align: right;
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 12px 16px;
+            background: var(--white);
+            border-radius: 18px;
+            width: fit-content;
+            align-self: flex-start;
+        }
+
+        .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            background: var(--gray-400);
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-6px); }
+        }
+
+        .quick-replies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .quick-reply {
+            padding: 8px 14px;
+            background: var(--accent-light);
+            border: 1px solid var(--accent);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--accent);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .quick-reply:hover {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        .chat-input {
+            padding: 15px 20px;
+            background: var(--white);
+            border-top: 1px solid var(--gray-200);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .chat-input input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+        }
+
+        .chat-input button {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease;
+        }
+
+        .chat-input button:hover { transform: scale(1.1); }
+        .chat-input button svg { width: 20px; height: 20px; fill: var(--primary); }
+
+        /* Flow Steps */
+        .flow-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .flow-step {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .flow-step::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 50%;
+            width: 20px;
+            height: 2px;
+            background: var(--gray-200);
+        }
+
+        .flow-step:first-child::before { display: none; }
+
+        .flow-step.active {
+            border-color: var(--accent);
+            box-shadow: 0 8px 30px var(--accent-glow);
+        }
+
+        .flow-step.completed {
+            border-color: var(--success);
+        }
+
+        .flow-step.completed::after {
+            content: '✓';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 28px;
+            height: 28px;
+            background: var(--success);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--gray-100);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .flow-step.active .step-number {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        .flow-step.completed .step-number {
+            background: var(--success);
+            color: white;
+        }
+
+        .step-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .step-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .step-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .feature-tag {
+            padding: 6px 12px;
+            background: var(--gray-100);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .feature-tag.premium {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            color: #92400e;
+        }
+
+        .feature-tag svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+        }
+
+        /* Branch Options */
+        .branch-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .branch-option {
+            flex: 1;
+            padding: 20px;
+            background: var(--gray-100);
+            border-radius: 12px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .branch-option:hover {
+            border-color: var(--accent);
+            background: var(--accent-light);
+        }
+
+        .branch-option.selected {
+            border-color: var(--accent);
+            background: var(--accent-light);
+        }
+
+        .branch-option h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .branch-option p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Tier Badge */
+        .tier-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-left: 10px;
+        }
+
+        .tier-badge.starter { background: var(--gray-200); color: var(--text-secondary); }
+        .tier-badge.professional { background: #dbeafe; color: #1e40af; }
+        .tier-badge.premium { background: linear-gradient(135deg, #fef3c7, #fde68a); color: #92400e; }
+
+        /* Legend */
+        .legend {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 16px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .legend h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .legend-items {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .legend-dot.starter { background: var(--gray-400); }
+        .legend-dot.professional { background: #3b82f6; }
+        .legend-dot.premium { background: var(--gold); }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 80px 5%;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .cta-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 30px var(--accent-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px var(--accent-glow);
+        }
+
+        .btn-primary svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        /* Reset Button */
+        .reset-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 15px 25px;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .reset-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .reset-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            padding: 60px 5% 30px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            max-width: 280px;
+        }
+
+        .footer-column h4 {
+            color: var(--white);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-column a {
+            display: block;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            margin-bottom: 0.75rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column a:hover { color: var(--accent); }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 40px auto 0;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .footer-bottom p, .footer-bottom a {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .phone-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .phone-mockup {
+                position: relative;
+                top: 0;
+                max-width: 380px;
+                margin: 0 auto 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .controls-container { gap: 10px; }
+            .scenario-btn { padding: 10px 16px; font-size: 0.85rem; }
+            .branch-container { flex-direction: column; }
+            .footer-content { grid-template-columns: 1fr; text-align: center; }
+            .footer-bottom { flex-direction: column; align-items: center; gap: 10px; }
+            .mobile-menu-btn { display: flex; }
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1002;
+        }
+
+        .mobile-menu-btn span {
+            width: 25px;
+            height: 2px;
+            background: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .mobile-menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-btn.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 22, 40, 0.8);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 280px;
+            height: 100vh;
+            background: var(--white);
+            padding: 100px 30px 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: right 0.3s ease;
+            z-index: 1001;
+            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--gray-200);
+            transition: color 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--accent);
+        }
+
+        .mobile-menu .nav-cta {
+            background: var(--accent);
+            color: var(--primary) !important;
+            padding: 15px 25px;
+            border-radius: 50px;
+            text-align: center;
+            margin-top: 20px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html" class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            </div>
+            <div>
+                <span class="logo-text">Bertos</span>
+                <p class="logo-tagline">Never Lose Patients</p>
+            </div>
+        </a>
+        <div class="nav-links" id="navLinks">
+            <a href="index.html#problem">The Problem</a>
+            <a href="index.html#solution">Solution</a>
+            <a href="index.html#pricing">Pricing</a>
+            <a href="about.html">About</a>
+            <a href="index.html#contact" class="nav-cta">Get Started</a>
+        </div>
+        <div class="mobile-menu-btn" id="mobileMenuBtn" onclick="toggleMobileMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="toggleMobileMenu()"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html#problem" onclick="toggleMobileMenu()">The Problem</a>
+        <a href="index.html#solution" onclick="toggleMobileMenu()">Solution</a>
+        <a href="index.html#pricing" onclick="toggleMobileMenu()">Pricing</a>
+        <a href="about.html">About</a>
+        <a href="index.html#contact" class="nav-cta" onclick="toggleMobileMenu()">Get Started</a>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>Interactive <span>Patient Journey</span></h1>
+        <p>Explore exactly how Bertos handles every patient interaction — from first message to booking, rescheduling, and more.</p>
+    </section>
+
+    <!-- Scenario Controls -->
+    <section class="controls-section">
+        <div class="controls-container">
+            <button class="scenario-btn active" data-scenario="booking">
+                <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg>
+                New Booking
+            </button>
+            <button class="scenario-btn" data-scenario="inquiry">
+                <svg viewBox="0 0 24 24"><path d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"/></svg>
+                Service Inquiry
+            </button>
+            <button class="scenario-btn" data-scenario="reschedule">
+                <svg viewBox="0 0 24 24"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+                Reschedule
+            </button>
+            <button class="scenario-btn" data-scenario="cancel">
+                <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                Cancel
+            </button>
+            <button class="scenario-btn" data-scenario="waitlist">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                Waitlist Alert
+            </button>
+            <button class="scenario-btn" data-scenario="payment">
+                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
+                With Payment
+            </button>
+        </div>
+    </section>
+
+    <!-- Main Flow Container -->
+    <div class="flow-container">
+        <!-- Legend -->
+        <div class="legend">
+            <h3>Feature Availability by Plan</h3>
+            <div class="legend-items">
+                <div class="legend-item">
+                    <span class="legend-dot starter"></span>
+                    Starter — Basic features
+                </div>
+                <div class="legend-item">
+                    <span class="legend-dot professional"></span>
+                    Professional — + Arabic, Reminders
+                </div>
+                <div class="legend-item">
+                    <span class="legend-dot premium"></span>
+                    Premium — + Payments, Waitlist
+                </div>
+            </div>
+        </div>
+
+        <!-- Phone + Steps Layout -->
+        <div class="phone-section">
+            <!-- Phone Mockup -->
+            <div class="phone-mockup">
+                <div class="phone-screen">
+                    <div class="phone-header">
+                        <div class="phone-avatar">🦷</div>
+                        <div class="phone-clinic-info">
+                            <h3>Smile Dental Clinic</h3>
+                            <p>Online • Typically replies instantly</p>
+                        </div>
+                    </div>
+                    <div class="chat-container" id="chatContainer">
+                        <!-- Messages will be populated by JS -->
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" placeholder="Type a message..." id="chatInput">
+                        <button id="sendBtn">
+                            <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flow Steps -->
+            <div class="flow-steps" id="flowSteps">
+                <!-- Steps will be populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Ready to Transform Your Patient Communication?</h2>
+        <p>Experience this yourself. Message our demo and see instant AI responses in action.</p>
+        <a href="https://wa.me/971529818923" target="_blank" class="btn-primary">
+            Try Live Demo on WhatsApp
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
+        </a>
+    </section>
+
+    <!-- Reset Button -->
+    <button class="reset-btn" id="resetBtn">
+        <svg viewBox="0 0 24 24"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+        Restart Flow
+    </button>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    </div>
+                    <span class="logo-text">Bertos</span>
+                </a>
+                <p>Never Lose Patients. Intelligent AI assistants for Dubai clinics.</p>
+            </div>
+            <div class="footer-column">
+                <h4>Product</h4>
+                <a href="index.html#solution">Features</a>
+                <a href="index.html#pricing">Pricing</a>
+                <a href="patient-journey.html">Patient Journey</a>
+            </div>
+            <div class="footer-column">
+                <h4>Company</h4>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-column">
+                <h4>Legal</h4>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Bertos. All rights reserved.</p>
+            <div>
+                <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+            
+            mobileMenu.classList.toggle('active');
+            mobileMenuBtn.classList.toggle('active');
+            mobileMenuOverlay.classList.toggle('active');
+            
+            if (mobileMenu.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Scenario data
+        const scenarios = {
+            booking: {
+                title: "New Appointment Booking",
+                steps: [
+                    {
+                        id: 1,
+                        title: "Patient Initiates Contact",
+                        description: "Patient sends a message to the clinic's WhatsApp number",
+                        features: ["24/7 Availability", "Instant Response"],
+                        tier: "starter",
+                        messages: [
+                            { type: "user", text: "Hi, I'd like to book an appointment for teeth whitening" },
+                            { type: "bot", text: "Hello! 👋 Welcome to Smile Dental Clinic. I'd be happy to help you book a teeth whitening appointment!\n\nOur professional teeth whitening starts from AED 1,500 and takes about 60-90 minutes.\n\nWould you like to proceed with booking?", time: "2 sec", quickReplies: ["Yes, book now", "Tell me more", "Other services"] }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        title: "Service Confirmation",
+                        description: "Bot confirms service selection and provides details",
+                        features: ["Service Catalog", "Pricing Info"],
+                        tier: "starter",
+                        messages: [
+                            { type: "user", text: "Yes, book now" },
+                            { type: "bot", text: "Great choice! ✨\n\nBefore we book, I'll need a few details:\n\n1️⃣ Your full name\n2️⃣ Phone number\n3️⃣ Preferred date and time\n\nLet's start — what's your full name?", time: "2 sec" }
+                        ]
+                    },
+                    {
+                        id: 3,
+                        title: "Collect Patient Details",
+                        description: "Bot collects name, phone, and preferred appointment time",
+                        features: ["Smart Data Collection", "Validation"],
+                        tier: "starter",
+                        messages: [
+                            { type: "user", text: "Sarah Ahmed" },
+                            { type: "bot", text: "Nice to meet you, Sarah! 😊\n\nWhat's the best phone number to reach you?", time: "1 sec" },
+                            { type: "user", text: "050 123 4567" },
+                            { type: "bot", text: "Got it! ✓\n\nWhen would you like to come in? We're open Saturday to Thursday, 9 AM to 8 PM.\n\nJust let me know your preferred date and time.", time: "2 sec", quickReplies: ["Tomorrow morning", "This weekend", "Next week"] }
+                        ]
+                    },
+                    {
+                        id: 4,
+                        title: "Schedule & Confirm",
+                        description: "Bot checks availability and confirms the appointment",
+                        features: ["Calendar Check", "Instant Confirmation"],
+                        tier: "starter",
+                        messages: [
+                            { type: "user", text: "This Saturday at 2pm" },
+                            { type: "bot", text: "Let me check availability for Saturday at 2:00 PM... ⏳", time: "1 sec" },
+                            { type: "bot", text: "You're all set, Sarah! ✅\n\n📅 **Appointment Confirmed**\n—————————————\n🦷 Service: Teeth Whitening\n📆 Date: Saturday, Feb 8, 2026\n⏰ Time: 2:00 PM\n📍 Location: Dubai Marina, Tower A\n💰 Price: AED 1,500\n—————————————\n\nWould you like us to notify you if an earlier slot becomes available?", time: "3 sec", quickReplies: ["Yes, notify me", "No thanks"] }
+                        ]
+                    },
+                    {
+                        id: 5,
+                        title: "Waitlist Opt-in (Optional)",
+                        description: "Patient can opt-in to receive earlier slot notifications",
+                        features: ["Waitlist", "Proactive Notifications"],
+                        tier: "premium",
+                        messages: [
+                            { type: "user", text: "Yes, notify me" },
+                            { type: "bot", text: "Done! 🔔\n\nYou're on our waitlist. If an earlier slot opens up, I'll message you right away.\n\nYou'll also receive a reminder 24 hours before your appointment.\n\nSee you Saturday, Sarah! 👋", time: "2 sec" }
+                        ]
+                    }
+                ]
+            },
+            inquiry: {
+                title: "Service Inquiry",
+                steps: [
+                    {
+                        id: 1,
+                        title: "Patient Asks About Services",
+                        description: "Patient inquires about available treatments",
+                        features: ["24/7 Availability", "Instant Response"],
+                        tier: "starter",
+                        messages: [
+                            { type: "user", text: "What services do you offer?" },
+                            { type: "bot", text: "Welcome to Smile Dental Clinic! 🦷\n\nWe offer a wide range of services:\n\n✨ **Cosmetic**\n• Teeth Whitening — AED 1,500\n• Veneers — from AED 2,500/tooth\n\n🔧 **General**\n• Cleaning & Checkup — AED 350\n• Fillings — from AED 400\n\n🦷 **Advanced**\n• Dental Implants — from AED 5,000\n• Invisalign — from AED 12,000\n\nWhich service interests you?", time: "3 sec", quickReplies: ["Teeth Whitening", "Implants", "Cleaning", "Other"] }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        title: "Detailed Service Info",
+                        description: "Bot provides specific details about the requested service",
+                        features: ["Service Details", "Pricing"],
+                        tier: "starter",
+                        messages: [
+                            { type: "user", text: "Tell me about implants" },
+                            { type: "bot", text: "Great question! Dental implants are a permanent solution for missing teeth. 🦷\n\n**What's Included:**\n• Consultation & X-rays\n• Titanium implant placement\n• Crown fitting\n• Follow-up visits\n\n**Pricing:** Starting from AED 5,000\n**Duration:** 2-3 visits over 3-6 months\n\n**Why Choose Us:**\n✓ German-made implants\n✓ 10-year warranty\n✓ 0% financing available\n\nWould you like to book a free consultation?", time: "3 sec", quickReplies: ["Book consultation", "More questions", "Pricing plans"] }
+                        ]
+                    },
+                    {
+                        id: 3,
+                        title: "Handle Follow-up Questions",
+                        description: "Bot answers additional questions intelligently",
+                        features: ["AI Understanding", "FAQ Handling"],
+                        tier: "starter",
+                        messages: [
+                            { type: "user", text: "Is it painful? How long is recovery?" },
+                            { type: "bot", text: "Great questions — these are common concerns! 💭\n\n**Pain:**\nThe procedure is done under local anesthesia, so you won't feel pain during placement. Most patients describe post-procedure discomfort as mild — similar to a tooth extraction. We prescribe pain medication if needed.\n\n**Recovery:**\n• Day 1-3: Mild swelling, soft foods\n• Week 1: Return to normal activities\n• 3-6 months: Implant fuses with bone\n• Final crown: Placed after healing\n\nMost patients are surprised how comfortable the process is!\n\nReady to book your free consultation?", time: "3 sec", quickReplies: ["Yes, book now", "Payment plans?", "Talk to someone"] }
+                        ]
+                    },
+                    {
+                        id: 4,
+                        title: "Human Handoff (If Needed)",
+                        description: "Complex queries seamlessly transfer to staff",
+                        features: ["Smart Handoff", "Context Transfer"],
+                        tier: "starter",
+                        messages: [
+                            { type: "user", text: "I want to talk to someone about my specific case" },
+                            { type: "bot", text: "Of course! I'll connect you with our patient coordinator right away. 👩‍⚕️\n\nBefore I do, here's a quick summary I'll share with them:\n• Interest: Dental Implants\n• Questions: Pain & recovery concerns\n\nOur team typically responds within 5-10 minutes during clinic hours (9 AM - 8 PM).\n\nIs there anything else you'd like me to add?", time: "2 sec", quickReplies: ["That's all", "Add more info"] }
+                        ]
+                    }
+                ]
+            },
+            reschedule: {
+                title: "Reschedule Appointment",
+                steps: [
+                    {
+                        id: 1,
+                        title: "Patient Requests Reschedule",
+                        description: "Patient wants to change their appointment time",
+                        features: ["Natural Language", "Intent Detection"],
+                        tier: "starter",
+                        messages: [
+                            { type: "user", text: "I need to reschedule my appointment" },
+                            { type: "bot", text: "No problem! I can help you reschedule. 📅\n\nTo find your booking, could you please share the phone number you used when booking?", time: "2 sec" }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        title: "Find Existing Booking",
+                        description: "Bot locates the appointment in the system",
+                        features: ["Booking Lookup", "Verification"],
+                        tier: "starter",
+                        messages: [
+                            { type: "user", text: "050 123 4567" },
+                            { type: "bot", text: "Found it! ✓\n\n📋 **Your Appointment:**\n—————————————\n🦷 Service: Teeth Whitening\n📆 Date: Saturday, Feb 8, 2026\n⏰ Time: 2:00 PM\n—————————————\n\nWhat would you like to do?", time: "2 sec", quickReplies: ["Reschedule", "Cancel", "Keep it"] }
+                        ]
+                    },
+                    {
+                        id: 3,
+                        title: "Select New Time",
+                        description: "Patient chooses a new appointment slot",
+                        features: ["Availability Check", "Flexible Options"],
+                        tier: "starter",
+                        messages: [
+                            { type: "user", text: "Reschedule" },
+                            { type: "bot", text: "When would work better for you?\n\nWe have these slots available:\n\n📅 **This Week:**\n• Thursday 2:00 PM, 4:00 PM\n• Friday 10:00 AM, 3:00 PM\n\n📅 **Next Week:**\n• Sunday - Thursday, various times\n\nJust tell me your preferred date and time!", time: "2 sec", quickReplies: ["Thursday 4pm", "Friday 10am", "Different week"] }
+                        ]
+                    },
+                    {
+                        id: 4,
+                        title: "Confirm Reschedule",
+                        description: "New appointment is confirmed",
+                        features: ["Instant Update", "Confirmation"],
+                        tier: "starter",
+                        messages: [
+                            { type: "user", text: "Thursday 4pm" },
+                            { type: "bot", text: "Done! Your appointment has been rescheduled. ✅\n\n📋 **Updated Appointment:**\n—————————————\n🦷 Service: Teeth Whitening\n📆 Date: Thursday, Feb 6, 2026\n⏰ Time: 4:00 PM\n📍 Location: Dubai Marina, Tower A\n—————————————\n\nYou'll receive a reminder 24 hours before.\n\nSee you Thursday! 👋", time: "2 sec" }
+                        ]
+                    }
+                ]
+            },
+            cancel: {
+                title: "Cancel Appointment",
+                steps: [
+                    {
+                        id: 1,
+                        title: "Patient Requests Cancellation",
+                        description: "Patient wants to cancel their appointment",
+                        features: ["Intent Detection", "Easy Process"],
+                        tier: "starter",
+                        messages: [
+                            { type: "user", text: "I need to cancel my appointment" },
+                            { type: "bot", text: "I'm sorry to hear you need to cancel. I can help with that.\n\nTo find your booking, could you please share the phone number you used when booking?", time: "2 sec" }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        title: "Verify & Show Booking",
+                        description: "Bot confirms which appointment to cancel",
+                        features: ["Booking Lookup", "Verification"],
+                        tier: "starter",
+                        messages: [
+                            { type: "user", text: "050 123 4567" },
+                            { type: "bot", text: "Found your appointment:\n\n📋 **Appointment Details:**\n—————————————\n🦷 Service: Teeth Whitening\n📆 Date: Saturday, Feb 8, 2026\n⏰ Time: 2:00 PM\n—————————————\n\nAre you sure you want to cancel this appointment?", time: "2 sec", quickReplies: ["Yes, cancel it", "No, keep it", "Reschedule instead"] }
+                        ]
+                    },
+                    {
+                        id: 3,
+                        title: "Confirm Cancellation",
+                        description: "Appointment is cancelled and waitlist is triggered",
+                        features: ["Instant Cancellation", "Waitlist Trigger"],
+                        tier: "starter",
+                        messages: [
+                            { type: "user", text: "Yes, cancel it" },
+                            { type: "bot", text: "Your appointment has been cancelled. ✓\n\n📋 **Cancelled:**\n• Teeth Whitening\n• Saturday, Feb 8 at 2:00 PM\n\nWe'd love to see you another time! Would you like to book a new appointment for a later date?", time: "2 sec", quickReplies: ["Book for later", "Not now, thanks"] }
+                        ]
+                    },
+                    {
+                        id: 4,
+                        title: "Offer Rebooking",
+                        description: "Bot tries to recover the patient for future visit",
+                        features: ["Patient Recovery", "Soft Sell"],
+                        tier: "starter",
+                        messages: [
+                            { type: "user", text: "Not now, thanks" },
+                            { type: "bot", text: "No problem at all! 😊\n\nFeel free to message us anytime when you're ready to reschedule. We're here 24/7.\n\nTake care, and we hope to see you soon! 👋", time: "2 sec" }
+                        ]
+                    }
+                ]
+            },
+            waitlist: {
+                title: "Waitlist Alert",
+                steps: [
+                    {
+                        id: 1,
+                        title: "Earlier Slot Opens Up",
+                        description: "When another patient cancels, the system checks the waitlist",
+                        features: ["Automatic Detection", "Smart Matching"],
+                        tier: "premium",
+                        messages: [
+                            { type: "bot", text: "🎉 **Good news, Sarah!**\n\nAn earlier appointment slot just opened up at Smile Dental Clinic.\n\n✨ **Available Slot:**\n—————————————\n📆 Thursday, Feb 6, 2026\n⏰ 2:00 PM\n🕐 3 hours earlier than your current booking!\n—————————————\n\nWould you like to take this earlier slot?", time: "Automatic", quickReplies: ["Yes, move me!", "No, keep original"] }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        title: "Patient Accepts Earlier Slot",
+                        description: "The appointment is automatically updated",
+                        features: ["Instant Update", "Confirmation"],
+                        tier: "premium",
+                        messages: [
+                            { type: "user", text: "Yes, move me!" },
+                            { type: "bot", text: "Done! Your appointment has been moved. ✅\n\n📋 **Updated Appointment:**\n—————————————\n🦷 Service: Teeth Whitening\n📆 Date: Thursday, Feb 6, 2026\n⏰ Time: 2:00 PM (moved from 5:00 PM)\n📍 Location: Dubai Marina, Tower A\n—————————————\n\nYou'll receive a reminder tomorrow.\n\nSee you Thursday! 🎉", time: "2 sec" }
+                        ]
+                    },
+                    {
+                        id: 3,
+                        title: "Auto-Timeout (If No Response)",
+                        description: "System moves to next person if no response in 30 min",
+                        features: ["Smart Timeout", "Queue Management"],
+                        tier: "premium",
+                        messages: [
+                            { type: "bot", text: "⏰ **Slot Update**\n\nHi Sarah! Just letting you know — since we didn't hear back, the earlier slot (2:00 PM) was offered to the next person on the waitlist.\n\nYour original appointment is still confirmed:\n📆 Thursday, Feb 6 at 5:00 PM\n\nNo action needed. See you then! 👋", time: "After 30 min" }
+                        ]
+                    }
+                ]
+            },
+            payment: {
+                title: "Booking with Payment",
+                steps: [
+                    {
+                        id: 1,
+                        title: "Patient Books Appointment",
+                        description: "Standard booking flow up to confirmation",
+                        features: ["All Booking Features"],
+                        tier: "starter",
+                        messages: [
+                            { type: "user", text: "I want to book a teeth whitening for Saturday" },
+                            { type: "bot", text: "Great choice! 😊 I'd love to help you book.\n\nTeeth Whitening: AED 1,500\n\nTo complete your booking, I'll need:\n1️⃣ Your name\n2️⃣ Phone number\n3️⃣ Preferred time on Saturday\n\nWhat's your name?", time: "2 sec" }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        title: "Collect Details",
+                        description: "Bot gathers patient information",
+                        features: ["Data Collection"],
+                        tier: "starter",
+                        messages: [
+                            { type: "user", text: "Ahmed Hassan, 055 987 6543, 3pm" },
+                            { type: "bot", text: "Thanks Ahmed! Let me confirm:\n\n📋 **Booking Summary:**\n—————————————\n👤 Name: Ahmed Hassan\n📱 Phone: 055 987 6543\n🦷 Service: Teeth Whitening\n📆 Date: Saturday, Feb 8, 2026\n⏰ Time: 3:00 PM\n💰 Price: AED 1,500\n—————————————\n\nTo confirm your appointment, a deposit of **AED 200** is required.\n\nReady to pay?", time: "3 sec", quickReplies: ["Pay now", "Why deposit?", "Pay at clinic"] }
+                        ]
+                    },
+                    {
+                        id: 3,
+                        title: "Payment Link Sent",
+                        description: "Secure payment link is generated and sent",
+                        features: ["Stripe/Tap Integration", "Secure Payments"],
+                        tier: "premium",
+                        messages: [
+                            { type: "user", text: "Pay now" },
+                            { type: "bot", text: "Here's your secure payment link:\n\n💳 **Pay AED 200 Deposit**\n🔒 pay.smiledentalclinic.ae/book/xK9mP2\n\nYou can pay with:\n• Credit/Debit Card\n• Apple Pay\n• Google Pay\n\nThe link expires in 15 minutes. Once paid, your appointment is instantly confirmed!\n\n⏳ Waiting for payment...", time: "2 sec" }
+                        ]
+                    },
+                    {
+                        id: 4,
+                        title: "Payment Confirmed",
+                        description: "Payment succeeds and booking is confirmed",
+                        features: ["Instant Confirmation", "Receipt"],
+                        tier: "premium",
+                        messages: [
+                            { type: "bot", text: "✅ **Payment Received — Thank You!**\n\nYour appointment is now confirmed.\n\n📋 **Confirmed Booking:**\n—————————————\n🦷 Teeth Whitening\n📆 Saturday, Feb 8, 2026 at 3:00 PM\n📍 Dubai Marina, Tower A\n💰 Deposit Paid: AED 200\n💰 Balance Due: AED 1,300 (at clinic)\n—————————————\n\n📧 Receipt sent to your WhatsApp\n🔔 Reminder coming 24 hours before\n\nSee you Saturday, Ahmed! 🎉", time: "Instant" }
+                        ]
+                    },
+                    {
+                        id: 5,
+                        title: "Cancellation with Refund",
+                        description: "If patient cancels, refund is processed automatically",
+                        features: ["Auto Refund", "Policy Enforcement"],
+                        tier: "premium",
+                        messages: [
+                            { type: "bot", text: "📌 **Cancellation Policy:**\n\n• Cancel 24+ hours before → Full deposit refund\n• Cancel within 24 hours → Deposit forfeited\n\nYour deposit of AED 200 will be refunded to your original payment method within 3-5 business days.\n\n✅ Refund initiated.", time: "If cancelled" }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        // State
+        let currentScenario = 'booking';
+        let currentStep = 0;
+
+        // DOM Elements
+        const chatContainer = document.getElementById('chatContainer');
+        const flowSteps = document.getElementById('flowSteps');
+        const scenarioBtns = document.querySelectorAll('.scenario-btn');
+        const resetBtn = document.getElementById('resetBtn');
+        const chatInput = document.getElementById('chatInput');
+        const sendBtn = document.getElementById('sendBtn');
+
+        // Initialize
+        function init() {
+            loadScenario(currentScenario);
+            setupEventListeners();
+        }
+
+        function setupEventListeners() {
+            scenarioBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const scenario = btn.dataset.scenario;
+                    scenarioBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentScenario = scenario;
+                    currentStep = 0;
+                    loadScenario(scenario);
+                });
+            });
+
+            resetBtn.addEventListener('click', () => {
+                currentStep = 0;
+                loadScenario(currentScenario);
+            });
+
+            sendBtn.addEventListener('click', advanceStep);
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') advanceStep();
+            });
+        }
+
+        function loadScenario(scenarioKey) {
+            const scenario = scenarios[scenarioKey];
+            
+            // Clear chat
+            chatContainer.innerHTML = '';
+            
+            // Clear and rebuild steps
+            flowSteps.innerHTML = '';
+            scenario.steps.forEach((step, index) => {
+                const stepEl = createStepElement(step, index);
+                flowSteps.appendChild(stepEl);
+            });
+
+            // Show first step
+            showStep(0);
+        }
+
+        function createStepElement(step, index) {
+            const div = document.createElement('div');
+            div.className = 'flow-step';
+            div.dataset.step = index;
+            
+            const tierBadge = step.tier === 'premium' ? '<span class="tier-badge premium">Premium</span>' :
+                             step.tier === 'professional' ? '<span class="tier-badge professional">Professional</span>' : '';
+            
+            const features = step.features.map(f => {
+                const isPremium = f.includes('Waitlist') || f.includes('Payment') || f.includes('Refund');
+                return `<span class="feature-tag ${isPremium ? 'premium' : ''}">${f}</span>`;
+            }).join('');
+
+            div.innerHTML = `
+                <div class="step-header">
+                    <div class="step-number">${step.id}</div>
+                    <h3 class="step-title">${step.title}${tierBadge}</h3>
+                </div>
+                <p class="step-description">${step.description}</p>
+                <div class="step-features">${features}</div>
+            `;
+
+            div.addEventListener('click', () => {
+                if (index <= currentStep) {
+                    showStep(index);
+                }
+            });
+
+            return div;
+        }
+
+        function showStep(stepIndex) {
+            const scenario = scenarios[currentScenario];
+            if (stepIndex >= scenario.steps.length) return;
+
+            currentStep = stepIndex;
+            const step = scenario.steps[stepIndex];
+
+            // Update step visuals
+            document.querySelectorAll('.flow-step').forEach((el, i) => {
+                el.classList.remove('active', 'completed');
+                if (i < stepIndex) el.classList.add('completed');
+                if (i === stepIndex) el.classList.add('active');
+            });
+
+            // Show messages up to current step
+            chatContainer.innerHTML = '';
+            for (let i = 0; i <= stepIndex; i++) {
+                const s = scenario.steps[i];
+                s.messages.forEach((msg, msgIndex) => {
+                    setTimeout(() => {
+                        addMessage(msg, i === stepIndex && msgIndex === s.messages.length - 1);
+                    }, msgIndex * 300);
+                });
+            }
+
+            // Scroll step into view
+            document.querySelectorAll('.flow-step')[stepIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function addMessage(msg, isLast = false) {
+            const div = document.createElement('div');
+            div.className = `message ${msg.type}`;
+            
+            let content = msg.text.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            
+            div.innerHTML = `
+                ${content}
+                ${msg.time ? `<span class="message-time">${msg.time}</span>` : ''}
+            `;
+            
+            chatContainer.appendChild(div);
+
+            // Add quick replies if last message and has them
+            if (isLast && msg.quickReplies) {
+                const quickDiv = document.createElement('div');
+                quickDiv.className = 'quick-replies';
+                msg.quickReplies.forEach(reply => {
+                    const btn = document.createElement('button');
+                    btn.className = 'quick-reply';
+                    btn.textContent = reply;
+                    btn.addEventListener('click', advanceStep);
+                    quickDiv.appendChild(btn);
+                });
+                chatContainer.appendChild(quickDiv);
+            }
+
+            // Scroll to bottom
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function advanceStep() {
+            const scenario = scenarios[currentScenario];
+            if (currentStep < scenario.steps.length - 1) {
+                showStep(currentStep + 1);
+            }
+            chatInput.value = '';
+        }
+
+        // Start
+        init();
+    </script>
+</body>
+</html>
